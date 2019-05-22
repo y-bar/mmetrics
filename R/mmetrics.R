@@ -1,4 +1,6 @@
-#' @importFrom magrittr %>%
+`%>%` <- magrittr::`%>%`
+`!!!` <- rlang::`!!!`
+`!!` <- rlang::`!!`
 
 default_metrics <- dplyr::vars(
   cost = sum(cost),
