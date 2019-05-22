@@ -12,6 +12,7 @@ BugReports: https://github.com/shinichi-takayanagi/mmetrics/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports:
+  magrittr,
   dplyr,
   rlang
 Suggests: 

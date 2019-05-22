@@ -1,3 +1,5 @@
+#' @importFrom magrittr %>%
+
 default_metrics <- dplyr::vars(
   cost = sum(cost),
   impression = sum(impression),
@@ -11,10 +13,19 @@ default_metrics <- dplyr::vars(
   ecpm = sum(cost)/sum(impression) * 1000
 )
 
+
+#' Add metrics to data.frame
+#'
+#' Add metrics to data.frame
+#'
+#' @param df data.frame
+#' @param ... dots
+#' @param metrics metrics
+#'
 #' @export
 add_metrics <- function(df, ..., metrics = default_metrics){
   group_vars <- rlang::enquos(...)
   df %>%
-    group_by(!!!group_vars) %>%
-    summarise(!!!metrics)
+    dplyr::group_by(!!!group_vars) %>%
+    dplyr::summarise(!!!metrics)
 }
