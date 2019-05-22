@@ -1,0 +1,25 @@
+Package: mmetrics
+Type: Package
+Title: Easy Computation of Marketing Metrics
+Version: 0.1.0
+Authors@R: c(
+  person("Shinichi", "Takayanagi", , "shinichi.takayanagi@gmail.com", role = c("aut", "cre")),
+  person("Nagi", "Teramo", , "teramonagi@gmail.com", role = c("aut"))
+  )
+Description: Easy Computation of Marketing Metrics
+URL: https://github.com/shinichi-takayanagi/mmetrics
+BugReports: https://github.com/shinichi-takayanagi/mmetrics/issues
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports:
+  magrittr,
+  dplyr,
+  rlang
+Suggests: 
+  testthat,
+  knitr,
+  rmarkdown
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
