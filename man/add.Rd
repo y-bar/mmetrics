@@ -18,3 +18,22 @@ add(df, ..., metrics = ad_metrics, summarize = FALSE)
 \description{
 Add metrics to data.frame
 }
+\examples{
+# Dummy data
+df <- data.frame(
+  gender = rep(c("M", "F"), 5),
+  age = (1:10)*10,
+  cost = c(51:60),
+  impression = c(101:110),
+  click = c(0:9)*3
+)
+
+metrics <- rlang::quos(
+  cost = sum(cost),
+  ctr  = sum(click)/sum(impression)
+)
+
+# Evaluate
+mmetrics::add(df, gender, metrics = metrics)
+
+}

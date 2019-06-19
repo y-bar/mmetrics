@@ -7,7 +7,8 @@ Authors@R: c(
   person("Nagi", "Teramo", , "teramonagi@gmail.com", role = c("aut")),
   person("Takahiro", "Yoshinaga", , "t.yoshinaga0106@gmail.com", role = c("aut"))
   )
-Description: Easy Computation of Marketing Metrics
+Description: Provides a mechanism for easy computation of marketing metrics.
+  You can easily change an analysis axis to calculate defined metrics.
 URL: https://github.com/shinichi-takayanagi/mmetrics
 BugReports: https://github.com/shinichi-takayanagi/mmetrics/issues
 License: MIT + file LICENSE
