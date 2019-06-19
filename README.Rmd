@@ -10,11 +10,12 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-"
 )
+options(knitr.table.format = 'markdown')
 ```
 
 # mmetrics
 
-[![Travis-CI Build Status](https://api.travis-ci.com/yutannihilation/mmetrics.svg?branch=master)](https://travis-ci.com/shinichi-takayanagi/mmetrics)
+[![Travis-CI Build Status](https://api.travis-ci.com/shinichi-takayanagi/mmetrics.svg?branch=master)](https://travis-ci.com/shinichi-takayanagi/mmetrics)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
 
 
@@ -30,7 +31,7 @@ devtools::install_github("shinichi-takayanagi/mmetrics")
 
 ## Example
 
-
+First, we create dummy data for this example.
 ```{r}
 library("mmetrics")
 # Dummy data
@@ -42,9 +43,11 @@ df <- data.frame(
   click = c(0:9)*3,
   conversion = c(0:9)
 )
+
 head(df)
 ```
 
+As a next step, we define metrics to evaluate using `rlang::quos`. 
 ```{r}
 # Example metrics
 metrics <- rlang::quos(
@@ -53,12 +56,22 @@ metrics <- rlang::quos(
 )
 ```
 
+Call `mmetrics::add()` with grouping key (here `gender`) then we will get new `data.frame` with defined metrics.
 ```{r}
 mmetrics::add(df, gender, metrics = metrics)
+```
+
+We can also use multiple grouping keys.
+```{r}
 mmetrics::add(df, gender, age, metrics = metrics)
 ```
 
+If we do not specify any grouping keys, `mmetrics::add()` behave like `dplyr::mutate()` as a default option.
 ```{r}
 mmetrics::add(df, metrics = metrics)
+```
+
+If we want to summarize all data, change `summarize` argument to `TRUE`.
+```{r}
 mmetrics::add(df, metrics = metrics, summarize=TRUE)
 ```
