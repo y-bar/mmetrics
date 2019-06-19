@@ -1,0 +1,64 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+```
+
+# mmetrics
+
+[![Travis-CI Build Status](https://api.travis-ci.com/yutannihilation/mmetrics.svg?branch=master)](https://travis-ci.com/shinichi-takayanagi/mmetrics)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
+
+
+## Installation
+
+```{r gh-installation, eval = FALSE}
+install.packages("mmetrics")
+
+# Or the development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("shinichi-takayanagi/mmetrics")
+```
+
+## Example
+
+
+```{r}
+library("mmetrics")
+# Dummy data
+df <- data.frame(
+  gender = rep(c("M", "F"), 5),
+  age = (1:10)*10,
+  cost = c(51:60),
+  impression = c(101:110),
+  click = c(0:9)*3,
+  conversion = c(0:9)
+)
+head(df)
+```
+
+```{r}
+# Example metrics
+metrics <- rlang::quos(
+  cost = sum(cost),
+  ctr  = sum(click)/sum(impression)
+)
+```
+
+```{r}
+mmetrics::add(df, gender, metrics = metrics)
+mmetrics::add(df, gender, age, metrics = metrics)
+```
+
+```{r}
+mmetrics::add(df, metrics = metrics)
+mmetrics::add(df, metrics = metrics, summarize=TRUE)
+```
