@@ -2,7 +2,7 @@
 `!!!` <- rlang::`!!!`
 `!!` <- rlang::`!!`
 
-default_metrics <- dplyr::vars(
+ad_metrics <- dplyr::vars(
   cost = sum(cost),
   impression = sum(impression),
   click = sum(click),
@@ -25,7 +25,7 @@ default_metrics <- dplyr::vars(
 #' @param metrics metrics
 #'
 #' @export
-add_metrics <- function(df, ..., metrics = default_metrics){
+add_metrics <- function(df, ..., metrics = ad_metrics){
   group_vars <- rlang::enquos(...)
   df %>%
     dplyr::group_by(!!!group_vars) %>%
