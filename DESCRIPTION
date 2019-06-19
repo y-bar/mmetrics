@@ -4,7 +4,8 @@ Title: Easy Computation of Marketing Metrics
 Version: 0.1.0
 Authors@R: c(
   person("Shinichi", "Takayanagi", , "shinichi.takayanagi@gmail.com", role = c("aut", "cre")),
-  person("Nagi", "Teramo", , "teramonagi@gmail.com", role = c("aut"))
+  person("Nagi", "Teramo", , "teramonagi@gmail.com", role = c("aut")),
+  person("Takahiro", "Yoshinaga", , "t.yoshinaga0106@gmail.com", role = c("aut"))
   )
 Description: Easy Computation of Marketing Metrics
 URL: https://github.com/shinichi-takayanagi/mmetrics
@@ -14,6 +15,8 @@ Encoding: UTF-8
 Imports:
   magrittr,
   dplyr,
+  purrr,
+  stringr,
   rlang
 Suggests: 
   testthat,
