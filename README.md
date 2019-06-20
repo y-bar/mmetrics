@@ -19,10 +19,11 @@ devtools::install_github("shinichi-takayanagi/mmetrics")
 
 ## Example
 
+### Create Dummy data
+
 First, we create dummy data for this example.
 
 ``` r
-library("mmetrics")
 # Dummy data
 df <- data.frame(
   gender = rep(c("M", "F"), 5),
@@ -43,6 +44,8 @@ head(df)
 #> 6      F  60   56        106    15          5
 ```
 
+### Define metrics
+
 As a next step, we define metrics to evaluate using `rlang::quos`.
 
 ``` r
@@ -52,6 +55,8 @@ metrics <- rlang::quos(
   ctr  = sum(click)/sum(impression)
 )
 ```
+
+### Just call `mmetrics::add()` \!
 
 Call `mmetrics::add()` with grouping key (here `gender`) then we will
 get new `data.frame` with defined metrics.
@@ -65,53 +70,9 @@ mmetrics::add(df, gender, metrics = metrics)
 #> 2 M        275 0.114
 ```
 
-We can also use multiple grouping keys.
+## More examples
 
-``` r
-mmetrics::add(df, gender, age, metrics = metrics)
-#> # A tibble: 10 x 4
-#> # Groups:   gender [2]
-#>    gender   age  cost    ctr
-#>    <fct>  <dbl> <int>  <dbl>
-#>  1 F         20    52 0.0294
-#>  2 F         40    54 0.0865
-#>  3 F         60    56 0.142 
-#>  4 F         80    58 0.194 
-#>  5 F        100    60 0.245 
-#>  6 M         10    51 0     
-#>  7 M         30    53 0.0583
-#>  8 M         50    55 0.114 
-#>  9 M         70    57 0.168 
-#> 10 M         90    59 0.220
-```
+See vignettes in more
+    details:
 
-If we do not specify any grouping keys, `mmetrics::add()` behave like
-`dplyr::mutate()` as a default option.
-
-``` r
-mmetrics::add(df, metrics = metrics)
-#> # A tibble: 10 x 4
-#> # Groups:   gender [2]
-#>    gender   age  cost    ctr
-#>    <fct>  <dbl> <int>  <dbl>
-#>  1 F         20    52 0.0294
-#>  2 F         40    54 0.0865
-#>  3 F         60    56 0.142 
-#>  4 F         80    58 0.194 
-#>  5 F        100    60 0.245 
-#>  6 M         10    51 0     
-#>  7 M         30    53 0.0583
-#>  8 M         50    55 0.114 
-#>  9 M         70    57 0.168 
-#> 10 M         90    59 0.220
-```
-
-If we want to summarize all data, change `summarize` argument to `TRUE`.
-
-``` r
-mmetrics::add(df, metrics = metrics, summarize=TRUE)
-#> # A tibble: 1 x 2
-#>    cost   ctr
-#>   <int> <dbl>
-#> 1   555 0.128
-```
+  - [Introduction](https://cran.r-project.org/web/packages/mmetrics/vignettes/introduction.html)

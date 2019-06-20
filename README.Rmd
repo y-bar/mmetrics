@@ -30,10 +30,9 @@ devtools::install_github("shinichi-takayanagi/mmetrics")
 ```
 
 ## Example
-
+### Create Dummy data
 First, we create dummy data for this example.
 ```{r}
-library("mmetrics")
 # Dummy data
 df <- data.frame(
   gender = rep(c("M", "F"), 5),
@@ -47,6 +46,7 @@ df <- data.frame(
 head(df)
 ```
 
+### Define metrics
 As a next step, we define metrics to evaluate using `rlang::quos`. 
 ```{r}
 # Example metrics
@@ -56,22 +56,13 @@ metrics <- rlang::quos(
 )
 ```
 
+### Just call `mmetrics::add()` !
 Call `mmetrics::add()` with grouping key (here `gender`) then we will get new `data.frame` with defined metrics.
 ```{r}
 mmetrics::add(df, gender, metrics = metrics)
 ```
 
-We can also use multiple grouping keys.
-```{r}
-mmetrics::add(df, gender, age, metrics = metrics)
-```
+## More examples
+See vignettes in more details:
 
-If we do not specify any grouping keys, `mmetrics::add()` behave like `dplyr::mutate()` as a default option.
-```{r}
-mmetrics::add(df, metrics = metrics)
-```
-
-If we want to summarize all data, change `summarize` argument to `TRUE`.
-```{r}
-mmetrics::add(df, metrics = metrics, summarize=TRUE)
-```
+- [Introduction](https://cran.r-project.org/web/packages/mmetrics/vignettes/introduction.html)

@@ -55,7 +55,8 @@ add <- function(df, ..., metrics = ad_metrics, summarize = FALSE){
   }
   df %>%
     dplyr::group_by(!!!group_vars) %>%
-    dplyr::summarise(!!!metrics)
+    dplyr::summarise(!!!metrics) %>%
+    dplyr::ungroup()
 }
 
 extract_variable_name <- function(quosure)
