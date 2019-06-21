@@ -16,7 +16,7 @@ install.packages("mmetrics")
 # install.packages("devtools")
 devtools::install_github("shinichi-takayanagi/mmetrics")
 ```
-
+  
 ## Example
 
 ### Create Dummy data
