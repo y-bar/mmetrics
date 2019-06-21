@@ -72,7 +72,4 @@ mmetrics::add(df, gender, metrics = metrics)
 
 ## More examples
 
-See vignettes in more
-    details:
-
-  - [Introduction](https://cran.r-project.org/web/packages/mmetrics/vignettes/introduction.html)
+See vignettes for more details.
