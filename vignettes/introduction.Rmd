@@ -1,0 +1,73 @@
+---
+title: "Introduction to {mmetrics} package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to {mmetrics} package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+This vignette shows you how to use `{mmetrics}` package.
+
+## Create Dummy Data
+```{r setup}
+library(mmetrics)
+```
+
+First, we create dummy data for this example.
+```{r}
+# Dummy data
+df <- data.frame(
+  gender = rep(c("M", "F"), 5),
+  age = (1:10)*10,
+  cost = c(51:60),
+  impression = c(101:110),
+  click = c(0:9)*3,
+  conversion = c(0:9)
+)
+
+head(df)
+```
+
+## Define metrics
+As a next step, we define metrics to evaluate using `rlang::quos`. 
+```{r}
+# Example metrics
+metrics <- rlang::quos(
+  cost = sum(cost),
+  ctr  = sum(click)/sum(impression)
+)
+```
+
+## How to use mmetrics::add() 
+
+### mmetrics::add() with sigle grouping key
+Call `mmetrics::add()` with grouping key (here `gender`) then we will get new `data.frame` with defined metrics.
+```{r}
+mmetrics::add(df, gender, metrics = metrics)
+```
+
+### mmetrics::add() with multiple grouping keys
+We can also use multiple grouping keys.
+```{r}
+mmetrics::add(df, gender, age, metrics = metrics)
+```
+
+### mmetrics::add() without any grouping keys
+If we do not specify any grouping keys, `mmetrics::add()` behave like `dplyr::mutate()` as a default option.
+```{r}
+mmetrics::add(df, metrics = metrics)
+```
+
+If we want to summarize all data, change `summarize` argument to `TRUE`.
+```{r}
+mmetrics::add(df, metrics = metrics, summarize=TRUE)
+```

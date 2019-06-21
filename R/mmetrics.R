@@ -25,6 +25,25 @@ ad_metrics <- rlang::quos(
 #' @param metrics metrics
 #' @param summarize summarize all data or not (mutate compatible behavior) when group keys(thee dots) are empty
 #'
+#' @examples
+#' # Dummy data
+#' df <- data.frame(
+#'   gender = rep(c("M", "F"), 5),
+#'   age = (1:10)*10,
+#'   cost = c(51:60),
+#'   impression = c(101:110),
+#'   click = c(0:9)*3
+#' )
+#'
+# Example metrics
+#' metrics <- rlang::quos(
+#'   cost = sum(cost),
+#'   ctr  = sum(click)/sum(impression)
+#' )
+#'
+#' # Evaluate
+#' mmetrics::add(df, gender, metrics = metrics)
+#'
 #' @export
 add <- function(df, ..., metrics = ad_metrics, summarize = FALSE){
   group_vars <- rlang::enquos(...)
@@ -36,7 +55,8 @@ add <- function(df, ..., metrics = ad_metrics, summarize = FALSE){
   }
   df %>%
     dplyr::group_by(!!!group_vars) %>%
-    dplyr::summarise(!!!metrics)
+    dplyr::summarise(!!!metrics) %>%
+    dplyr::ungroup()
 }
 
 extract_variable_name <- function(quosure)
