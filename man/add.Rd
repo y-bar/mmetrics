@@ -31,7 +31,7 @@ df <- data.frame(
   click = c(0:9)*3
 )
 
-metrics <- mmetrics::metrics(
+metrics <- mmetrics::define(
   cost = sum(cost),
   ctr  = sum(click)/sum(impression)
 )

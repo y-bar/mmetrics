@@ -38,10 +38,10 @@ head(df)
 ```
 
 ## Define metrics
-As a next step, we define metrics to evaluate using `mmetrics::metrics`. 
+As a next step, we define metrics to evaluate using `mmetrics::define`. 
 ```{r}
 # Example metrics
-metrics <- mmetrics::metrics(
+metrics <- mmetrics::define(
   cost = sum(cost),
   ctr  = sum(click)/sum(impression)
 )

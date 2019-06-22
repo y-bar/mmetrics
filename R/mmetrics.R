@@ -16,12 +16,12 @@
 #'   [quos][rlang::quos], [dplyr's vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html)
 #'
 #' @export
-metrics <- function(...){
+define <- function(...){
   rlang::quos(...)
 }
 
 # Advertisng world metrics
-ad_metrics <- metrics(
+ad_metrics <- define(
   cost = sum(cost),
   impression = sum(impression),
   click = sum(click),
@@ -55,7 +55,7 @@ ad_metrics <- metrics(
 #' )
 #'
 # Example metrics
-#' metrics <- mmetrics::metrics(
+#' metrics <- mmetrics::define(
 #'   cost = sum(cost),
 #'   ctr  = sum(click)/sum(impression)
 #' )
