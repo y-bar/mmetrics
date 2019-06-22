@@ -1,9 +1,27 @@
+# To use these operators inside this package, we have to do like this
 `%>%` <- magrittr::`%>%`
 `!!!` <- rlang::`!!!`
 `!!` <- rlang::`!!`
 
+#' Define metrics
+#'
+#' This helper is just synonum for [rlang::quos] intended to provide seamless experience for package user.
+#'
+#' @param ... Metrics definition.
+#'
+#'   These arguments are automatically [quoted][rlang::quo]
+#'   and [evaluated][rlang::eval_tidy] in the context of the data frame.
+#'
+#' @seealso
+#'   [quos][rlang::quos], [dplyr's vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html)
+#'
+#' @export
+define <- function(...){
+  rlang::quos(...)
+}
+
 # Advertisng world metrics
-ad_metrics <- rlang::quos(
+ad_metrics <- define(
   cost = sum(cost),
   impression = sum(impression),
   click = sum(click),
@@ -23,7 +41,7 @@ ad_metrics <- rlang::quos(
 #' @param df data.frame
 #' @param ... group keys
 #' @param metrics metrics
-#' @param summarize summarize all data or not (mutate compatible behavior) when group keys(thee dots) are empty
+#' @param summarize summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty
 #' @return data.frame with calculated metrics
 #'
 #' @examples
@@ -37,7 +55,7 @@ ad_metrics <- rlang::quos(
 #' )
 #'
 # Example metrics
-#' metrics <- rlang::quos(
+#' metrics <- mmetrics::define(
 #'   cost = sum(cost),
 #'   ctr  = sum(click)/sum(impression)
 #' )
@@ -64,4 +82,3 @@ extract_variable_name <- function(quosure)
 {
   stringr::str_extract_all(rlang::quo_text(quosure), "\\w+")[[1]]
 }
-

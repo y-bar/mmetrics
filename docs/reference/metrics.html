@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • mmetrics</title>
+<title>Define metrics — metrics • mmetrics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Define metrics — metrics" />
+
+<meta property="og:description" content="This helper is just synonum for rlang::quos intended to provide seamless experience for package user." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -106,48 +109,46 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Define metrics</h1>
+    <small class="dont-index">Source: <a href='https://github.com/shinichi-takayanagi/mmetrics/blob/master/R/mmetrics.R'><code>R/mmetrics.R</code></a></small>
+    <div class="hidden name"><code>metrics.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>This helper is just synonum for <a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::quos</a> intended to provide seamless experience for package user.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="add.html">add()</a></code> </p>
-        </td>
-        <td><p>Add metrics to data.frame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="define.html">define()</a></code> </p>
-        </td>
-        <td><p>Define metrics</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>metrics</span>(<span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Metrics definition.</p>
+<p>These arguments are automatically <a href='https://rlang.r-lib.org/reference/quotation.html'>quoted</a>
+and <a href='https://rlang.r-lib.org/reference/eval_tidy.html'>evaluated</a> in the context of the data frame.</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://rlang.r-lib.org/reference/quotation.html'>quos</a>, <a href='https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html'>dplyr's vignettes</a></p></div>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#see-also">See also</a></li>
+          </ul>
+
   </div>
 </div>
 

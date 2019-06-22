@@ -9,10 +9,14 @@ df <- data.frame(
   conversion = c(0:3)
 )
 
-metrics <- rlang::quos(
+metrics <- define(
   cost = sum(cost),
   ctr  = sum(click)/sum(impression)
 )
+
+test_that("define metrics", {
+  expect_equal(metrics, rlang::quos(cost = sum(cost), ctr  = sum(click)/sum(impression)))
+})
 
 test_that("summarize one key", {
   df_expected <- dplyr::group_by(df, gender) %>%

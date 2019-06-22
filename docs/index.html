@@ -125,9 +125,9 @@
 <div id="define-metrics" class="section level3">
 <h3 class="hasAnchor">
 <a href="#define-metrics" class="anchor"></a>Define metrics</h3>
-<p>As a next step, we define metrics to evaluate using <code><a href="https://rlang.r-lib.org/reference/quotation.html">rlang::quos</a></code>.</p>
+<p>As a next step, we define metrics to evaluate using <code><a href="reference/define.html">mmetrics::define</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Example metrics</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>metrics &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quos</a></span>(</span>
+<span id="cb3-2"><a href="#cb3-2"></a>metrics &lt;-<span class="st"> </span>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/define">define</a></span>(</span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">cost =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(cost),</span>
 <span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">ctr  =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(click)<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(impression)</span>
 <span id="cb3-5"><a href="#cb3-5"></a>)</span></code></pre></div>
