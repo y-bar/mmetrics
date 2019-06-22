@@ -91,36 +91,36 @@
 <div id="create-dummy-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-dummy-data" class="anchor"></a>Create Dummy Data</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(mmetrics)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(mmetrics)</span></code></pre></div>
 <p>First, we create dummy data for this example.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Dummy data</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">gender =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"M"</span>, <span class="st">"F"</span>), <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="dt">age =</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)<span class="op">*</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="dt">cost =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">51</span><span class="op">:</span><span class="dv">60</span>),</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="dt">impression =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">101</span><span class="op">:</span><span class="dv">110</span>),</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="dt">click =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>)<span class="op">*</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  <span class="dt">conversion =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(df)</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;   gender age cost impression click conversion</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; 1      M  10   51        101     0          0</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 2      F  20   52        102     3          1</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 3      M  30   53        103     6          2</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; 4      F  40   54        104     9          3</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; 5      M  50   55        105    12          4</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 6      F  60   56        106    15          5</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Dummy data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">gender =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"M"</span>, <span class="st">"F"</span>), <span class="dv">5</span>),</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">age =</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)<span class="op">*</span><span class="dv">10</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">cost =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">51</span><span class="op">:</span><span class="dv">60</span>),</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="dt">impression =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">101</span><span class="op">:</span><span class="dv">110</span>),</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="dt">click =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>)<span class="op">*</span><span class="dv">3</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="dt">conversion =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(df)</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   gender age cost impression click conversion</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 1      M  10   51        101     0          0</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 2      F  20   52        102     3          1</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; 3      M  30   53        103     6          2</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; 4      F  40   54        104     9          3</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; 5      M  50   55        105    12          4</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; 6      F  60   56        106    15          5</span></span></code></pre></div>
 </div>
 <div id="define-metrics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#define-metrics" class="anchor"></a>Define metrics</h2>
 <p>As a next step, we define metrics to evaluate using <code><a href="https://rlang.r-lib.org/reference/quotation.html">rlang::quos</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Example metrics</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">metrics &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quos</a></span>(</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">cost =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(cost),</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="dt">ctr  =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(click)<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(impression)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Example metrics</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>metrics &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quos</a></span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">cost =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(cost),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">ctr  =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(click)<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(impression)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>)</span></code></pre></div>
 </div>
 <div id="how-to-use-mmetricsadd" class="section level2">
 <h2 class="hasAnchor">
@@ -129,56 +129,56 @@
 <h3 class="hasAnchor">
 <a href="#mmetricsadd-with-sigle-grouping-key" class="anchor"></a>mmetrics::add() with sigle grouping key</h3>
 <p>Call <code><a href="../reference/add.html">mmetrics::add()</a></code> with grouping key (here <code>gender</code>) then we will get new <code>data.frame</code> with defined metrics.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, gender, <span class="dt">metrics =</span> metrics)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;   gender  cost   ctr</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;   &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; 1 F        280 0.142</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 2 M        275 0.114</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, gender, <span class="dt">metrics =</span> metrics)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; # A tibble: 2 x 3</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt;   gender  cost   ctr</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;   &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; 1 F        280 0.142</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; 2 M        275 0.114</span></span></code></pre></div>
 </div>
 <div id="mmetricsadd-with-multiple-grouping-keys" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mmetricsadd-with-multiple-grouping-keys" class="anchor"></a>mmetrics::add() with multiple grouping keys</h3>
 <p>We can also use multiple grouping keys.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, gender, age, <span class="dt">metrics =</span> metrics)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 4</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    gender   age  cost    ctr</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 F         20    52 0.0294</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  2 F         40    54 0.0865</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  3 F         60    56 0.142 </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  4 F         80    58 0.194 </span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  5 F        100    60 0.245 </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  6 M         10    51 0     </span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  7 M         30    53 0.0583</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 M         50    55 0.114 </span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 M         70    57 0.168 </span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 M         90    59 0.220</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, gender, age, <span class="dt">metrics =</span> metrics)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; # A tibble: 10 x 4</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;    gender   age  cost    ctr</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;  1 F         20    52 0.0294</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;  2 F         40    54 0.0865</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;  3 F         60    56 0.142 </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt;  4 F         80    58 0.194 </span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;  5 F        100    60 0.245 </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;  6 M         10    51 0     </span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;  7 M         30    53 0.0583</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;  8 M         50    55 0.114 </span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;  9 M         70    57 0.168 </span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; 10 M         90    59 0.220</span></span></code></pre></div>
 </div>
 <div id="mmetricsadd-without-any-grouping-keys" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mmetricsadd-without-any-grouping-keys" class="anchor"></a>mmetrics::add() without any grouping keys</h3>
 <p>If we do not specify any grouping keys, <code><a href="../reference/add.html">mmetrics::add()</a></code> behave like <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> as a default option.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, <span class="dt">metrics =</span> metrics)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 4</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;    gender   age  cost    ctr</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;  1 F         20    52 0.0294</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;  2 F         40    54 0.0865</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;  3 F         60    56 0.142 </span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;  4 F         80    58 0.194 </span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt;  5 F        100    60 0.245 </span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;  6 M         10    51 0     </span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt;  7 M         30    53 0.0583</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt;  8 M         50    55 0.114 </span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt;  9 M         70    57 0.168 </span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 10 M         90    59 0.220</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, <span class="dt">metrics =</span> metrics)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 10 x 4</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;    gender   age  cost    ctr</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;  1 F         20    52 0.0294</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;  2 F         40    54 0.0865</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;  3 F         60    56 0.142 </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;  4 F         80    58 0.194 </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;  5 F        100    60 0.245 </span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;  6 M         10    51 0     </span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;  7 M         30    53 0.0583</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;  8 M         50    55 0.114 </span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;  9 M         70    57 0.168 </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; 10 M         90    59 0.220</span></span></code></pre></div>
 <p>If we want to summarize all data, change <code>summarize</code> argument to <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, <span class="dt">metrics =</span> metrics, <span class="dt">summarize=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;    cost   ctr</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1   555 0.128</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, <span class="dt">metrics =</span> metrics, <span class="dt">summarize =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; # A tibble: 1 x 2</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt;    cost   ctr</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 1   555 0.128</span></span></code></pre></div>
 </div>
 </div>
   </div>
