@@ -6,6 +6,9 @@
 [![Travis-CI Build
 Status](https://api.travis-ci.com/shinichi-takayanagi/mmetrics.svg?branch=master)](https://travis-ci.com/shinichi-takayanagi/mmetrics)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
+[![codecov](https://codecov.io/github/shinichi-takayanagi/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/shinichi-takayanagi/mmetrics)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 ## Installation
 
@@ -16,7 +19,7 @@ install.packages("mmetrics")
 # install.packages("devtools")
 devtools::install_github("shinichi-takayanagi/mmetrics")
 ```
-  
+
 ## Example
 
 ### Create Dummy data
