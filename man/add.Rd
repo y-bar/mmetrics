@@ -13,7 +13,7 @@ add(df, ..., metrics = ad_metrics, summarize = FALSE)
 
 \item{metrics}{metrics}
 
-\item{summarize}{summarize all data or not (mutate compatible behavior) when group keys(thee dots) are empty}
+\item{summarize}{summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty}
 }
 \value{
 data.frame with calculated metrics
@@ -31,7 +31,7 @@ df <- data.frame(
   click = c(0:9)*3
 )
 
-metrics <- rlang::quos(
+metrics <- mmetrics::metrics(
   cost = sum(cost),
   ctr  = sum(click)/sum(impression)
 )

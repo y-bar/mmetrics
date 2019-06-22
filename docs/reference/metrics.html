@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add metrics to data.frame — add • mmetrics</title>
+<title>Define metrics — metrics • mmetrics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Add metrics to data.frame — add" />
+<meta property="og:title" content="Define metrics — metrics" />
 
-<meta property="og:description" content="Add metrics to data.frame" />
+<meta property="og:description" content="This helper is just synonum for rlang::quos intended to provide seamless experience for package user." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,77 +111,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add metrics to data.frame</h1>
+    <h1>Define metrics</h1>
     <small class="dont-index">Source: <a href='https://github.com/shinichi-takayanagi/mmetrics/blob/master/R/mmetrics.R'><code>R/mmetrics.R</code></a></small>
-    <div class="hidden name"><code>add.Rd</code></div>
+    <div class="hidden name"><code>metrics.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Add metrics to data.frame</p>
+    <p>This helper is just synonum for <a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::quos</a> intended to provide seamless experience for package user.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>ad_metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>metrics</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>data.frame</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>group keys</p></td>
-    </tr>
-    <tr>
-      <th>metrics</th>
-      <td><p>metrics</p></td>
-    </tr>
-    <tr>
-      <th>summarize</th>
-      <td><p>summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty</p></td>
+      <td><p>Metrics definition.</p>
+<p>These arguments are automatically <a href='https://rlang.r-lib.org/reference/quotation.html'>quoted</a>
+and <a href='https://rlang.r-lib.org/reference/eval_tidy.html'>evaluated</a> in the context of the data frame.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>data.frame with calculated metrics</p>
+    <div class='dont-index'><p><a href='https://rlang.r-lib.org/reference/quotation.html'>quos</a>, <a href='https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html'>dplyr's vignettes</a></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Dummy data</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(
-  <span class='kw'>gender</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"M"</span>, <span class='st'>"F"</span>), <span class='fl'>5</span>),
-  <span class='kw'>age</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)*<span class='fl'>10</span>,
-  <span class='kw'>cost</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>51</span>:<span class='fl'>60</span>),
-  <span class='kw'>impression</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>101</span>:<span class='fl'>110</span>),
-  <span class='kw'>click</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>:<span class='fl'>9</span>)*<span class='fl'>3</span>
-)
-
-<span class='no'>metrics</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/metrics'>metrics</a></span>(
-  <span class='kw'>cost</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>cost</span>),
-  <span class='kw'>ctr</span>  <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>click</span>)/<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>impression</span>)
-)
-
-<span class='co'># Evaluate</span>
-<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/add'>add</a></span>(<span class='no'>df</span>, <span class='no'>gender</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>metrics</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 3</span><span>
-#&gt;   gender  cost   ctr
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> F        280 0.142
-#&gt; </span><span style='color: #555555;'>2</span><span> M        275 0.114</div><div class='input'>
-</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

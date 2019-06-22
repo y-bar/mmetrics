@@ -38,10 +38,10 @@ head(df)
 ```
 
 ## Define metrics
-As a next step, we define metrics to evaluate using `rlang::quos`. 
+As a next step, we define metrics to evaluate using `mmetrics::metrics`. 
 ```{r}
 # Example metrics
-metrics <- rlang::quos(
+metrics <- mmetrics::metrics(
   cost = sum(cost),
   ctr  = sum(click)/sum(impression)
 )
