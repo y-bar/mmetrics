@@ -75,4 +75,5 @@ mmetrics::add(df, gender, metrics = metrics)
 
 ## More examples
 
-See vignettes for more details.
+  - As a first step, see the vignettes [Introduction to {mmetrics}
+    package](https://shinichi-takayanagi.github.io/mmetrics/articles/introduction.html)

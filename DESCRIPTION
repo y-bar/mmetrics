@@ -8,8 +8,8 @@ Authors@R: c(
   person("Takahiro", "Yoshinaga", , "t.yoshinaga0106@gmail.com", role = c("aut"))
   )
 Description: Provides a mechanism for easy computation of marketing metrics.
-  By default in this package, metrics for digital marketing (e.g. CTR, CVR, CPC etc) are calculated but you can define your own metrics easily.
-  In addition to taht, you can change an analysis axis to calculate these metrics.
+  By default in this package, metrics for digital marketing (e.g. CTR (Click Through Rate), CVR (Conversion Rate), CPC (Cost Per Click) etc) are calculated but you can define your own metrics easily.
+  In addition to that, you can change an analysis axis to calculate these metrics.
 URL: https://github.com/shinichi-takayanagi/mmetrics
 BugReports: https://github.com/shinichi-takayanagi/mmetrics/issues
 License: MIT + file LICENSE
