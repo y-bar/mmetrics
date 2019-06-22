@@ -21,6 +21,8 @@ Imports:
   stringr,
   rlang
 Suggests: 
+  covr,
+  devtools,
   testthat,
   knitr,
   rmarkdown
