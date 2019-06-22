@@ -24,6 +24,7 @@ ad_metrics <- rlang::quos(
 #' @param ... group keys
 #' @param metrics metrics
 #' @param summarize summarize all data or not (mutate compatible behavior) when group keys(thee dots) are empty
+#' @return data.frame with calculated metrics
 #'
 #' @examples
 #' # Dummy data

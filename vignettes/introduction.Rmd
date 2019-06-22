@@ -69,5 +69,5 @@ mmetrics::add(df, metrics = metrics)
 
 If we want to summarize all data, change `summarize` argument to `TRUE`.
 ```{r}
-mmetrics::add(df, metrics = metrics, summarize=TRUE)
+mmetrics::add(df, metrics = metrics, summarize = TRUE)
 ```
