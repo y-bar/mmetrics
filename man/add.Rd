@@ -15,6 +15,9 @@ add(df, ..., metrics = ad_metrics, summarize = FALSE)
 
 \item{summarize}{summarize all data or not (mutate compatible behavior) when group keys(thee dots) are empty}
 }
+\value{
+data.frame with calculated metrics
+}
 \description{
 Add metrics to data.frame
 }
