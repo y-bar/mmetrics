@@ -16,5 +16,5 @@ and \link[rlang:eval_tidy]{evaluated} in the context of the data frame.}
 This helper is just synonum for \link[rlang:quos]{rlang::quos} intended to provide seamless experience for package user.
 }
 \seealso{
-\link[rlang:quos]{quos}, \href{https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html}{dplyr's vignettes}
+\link[rlang:quos]{quos}, \href{https://cran.r-project.org/package=dplyr/vignettes/programming.html}{dplyr's vignettes}
 }

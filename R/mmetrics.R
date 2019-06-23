@@ -13,7 +13,7 @@
 #'   and [evaluated][rlang::eval_tidy] in the context of the data frame.
 #'
 #' @seealso
-#'   [quos][rlang::quos], [dplyr's vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html)
+#'   [quos][rlang::quos], [dplyr's vignettes](https://cran.r-project.org/package=dplyr/vignettes/programming.html)
 #'
 #' @export
 define <- function(...){
