@@ -67,7 +67,7 @@ ad_metrics <- define(
 add <- function(df, ..., metrics = ad_metrics, summarize = FALSE){
   group_vars <- rlang::enquos(...)
   if(length(group_vars) == 0 && !summarize){
-    variable_names <- unique(purrr::reduce(purrr::map(ad_metrics, extract_variable_name), c))
+    variable_names <- unique(purrr::reduce(purrr::map(metrics, extract_variable_name), c))
     colnames <- names(df)
     keys <- colnames[!(colnames %in% variable_names)]
     group_vars <- rlang::syms(keys)
