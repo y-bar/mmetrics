@@ -30,13 +30,8 @@ test_that("summarize two keys", {
   expect_equal(add(df, gender, age, metrics = metrics), df_expected)
 })
 
-test_that("summarize two keys implicitly", {
-  df_expected <- dplyr::group_by(df, gender, age) %>%
-    dplyr::summarise(cost=sum(cost), ctr=sum(click)/sum(impression))
-  expect_equal(add(df, metrics = metrics), df_expected)
-})
 
-test_that("summarize", {
+test_that("summarize all", {
   df_expected <- dplyr::summarise(df, cost=sum(cost), ctr=sum(click)/sum(impression))
-  expect_equal(add(df, metrics = metrics, summarize=TRUE), df_expected)
+  expect_equal(add(df, metrics = metrics), df_expected)
 })

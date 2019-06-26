@@ -41,7 +41,6 @@ ad_metrics <- define(
 #' @param df data.frame
 #' @param ... group keys
 #' @param metrics metrics
-#' @param summarize summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty
 #' @return data.frame with calculated metrics
 #'
 #' @examples
@@ -64,21 +63,51 @@ ad_metrics <- define(
 #' mmetrics::add(df, gender, metrics = metrics)
 #'
 #' @export
-add <- function(df, ..., metrics = ad_metrics, summarize = FALSE){
+add <- function(df, ..., metrics = ad_metrics){
   group_vars <- rlang::enquos(...)
-  if(length(group_vars) == 0 && !summarize){
-    variable_names <- unique(purrr::reduce(purrr::map(metrics, extract_variable_name), c))
-    colnames <- names(df)
-    keys <- colnames[!(colnames %in% variable_names)]
-    group_vars <- rlang::syms(keys)
-  }
   df %>%
     dplyr::group_by(!!!group_vars) %>%
     dplyr::summarise(!!!metrics) %>%
     dplyr::ungroup()
 }
 
-extract_variable_name <- function(quosure)
-{
-  stringr::str_extract_all(rlang::quo_text(quosure), "\\w+")[[1]]
+allowed_operators <- list(
+  quote(`+`),
+  quote(`%*%`),
+  quote(`%%`),
+  quote(`-`),
+  quote(`/`),
+  quote(`*`)
+)
+
+disaggregate_ <- function(x, is_top) {
+  if(is_top){x <- rlang::quo_expr(x)}
+  if(length(x) == 1){return(x)}
+
+  call_name <- x[[1]]
+  call_args <- x[-1]
+
+  if (!any(purrr::map_lgl(allowed_operators, ~ identical(.x, call_name)))){
+    # Remove function, only first level aggregate function is removed
+    x[[1]] <- NULL
+    if(is_top){
+      return(rlang::quo(!!x[[1]]))
+    } else{
+      return(x[[1]])
+    }
+  }
+
+  x[-1] <- purrr::map(call_args, ~ disaggregate_(.x, FALSE))
+  rlang::quo(!!x)
 }
+
+disaggregate <- function(metrics){
+  if(rlang::is_quosures(metrics)){
+    purrr::map(metrics, ~ disaggregate_(.x, TRUE))
+  } else if(rlang::is_quosure(metrics)){
+    disaggregate_(metrics, TRUE)
+  } else{
+    stop("")
+  }
+}
+
