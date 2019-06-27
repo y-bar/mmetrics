@@ -2,3 +2,4 @@
 
 export(add)
 export(define)
+export(disaggregate)

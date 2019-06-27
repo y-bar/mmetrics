@@ -62,12 +62,12 @@ mmetrics::add(df, gender, age, metrics = metrics)
 ```
 
 ### mmetrics::add() without any grouping keys
-If we do not specify any grouping keys, `mmetrics::add()` behave like `dplyr::mutate()` as a default option.
-```{r}
-mmetrics::add(df, metrics = metrics)
-```
-
-If we want to summarize all data, change `summarize` argument to `TRUE`.
+If we want to just summarize all data
 ```{r}
 mmetrics::add(df, metrics = metrics, summarize = TRUE)
+```
+
+If we do not specify any grouping keys, `mmetrics::add()` behave like `dplyr::mutate()` as a default option.
+```{r}
+mmetrics::add(df, metrics = metrics, summarize = FALSE)
 ```

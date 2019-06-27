@@ -63,12 +63,18 @@ ad_metrics <- define(
 #' mmetrics::add(df, gender, metrics = metrics)
 #'
 #' @export
-add <- function(df, ..., metrics = ad_metrics){
+add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
   group_vars <- rlang::enquos(...)
-  df %>%
-    dplyr::group_by(!!!group_vars) %>%
-    dplyr::summarise(!!!metrics) %>%
-    dplyr::ungroup()
+
+  if(length(group_vars) == 0 && !summarize){
+    warning("disaggregate() called inside. See the result of disaggregate(metrics) to check wether output metrics is what you want.")
+    dplyr::mutate(df, !!!disaggregate(metrics))
+  } else{
+    df %>%
+      dplyr::group_by(!!!group_vars) %>%
+      dplyr::summarise(!!!metrics) %>%
+      dplyr::ungroup()
+  }
 }
 
 allowed_operators <- list(
@@ -81,7 +87,7 @@ allowed_operators <- list(
 )
 
 disaggregate_ <- function(x, is_top) {
-  if(is_top){x <- rlang::quo_expr(x)}
+  if(is_top){x <- rlang::quo_squash(x)}
   if(length(x) == 1){return(x)}
 
   call_name <- x[[1]]
@@ -101,6 +107,24 @@ disaggregate_ <- function(x, is_top) {
   rlang::quo(!!x)
 }
 
+#' Disaggregate metrics defined as aggregate function
+#'
+#' Disaggregate metrics defined as aggregate function
+#'
+#' @param metrics metrics defined by mmetrics::define()
+#' @return disaggregated metrics (rlang::quosure or rlang::quosures)
+#'
+#' @examples
+#'
+#' metrics <- mmetrics::define(
+#'   cost = sum(cost),
+#'   ctr  = sum(click)/sum(impression)
+#' )
+#'
+#' # Evaluate
+#' mmetrics::disaggregate(metrics)
+#'
+#' @export
 disaggregate <- function(metrics){
   if(rlang::is_quosures(metrics)){
     purrr::map(metrics, ~ disaggregate_(.x, TRUE))
