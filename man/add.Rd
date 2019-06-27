@@ -11,7 +11,7 @@ add(df, ..., metrics = ad_metrics, summarize = TRUE)
 
 \item{...}{group keys}
 
-\item{metrics}{metrics}
+\item{metrics}{metrics defined by mmetrics::define()}
 }
 \value{
 data.frame with calculated metrics

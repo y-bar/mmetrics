@@ -26,7 +26,7 @@ define <- function(...){
 #'
 #' @param df data.frame
 #' @param ... group keys
-#' @param metrics metrics
+#' @param metrics metrics defined by mmetrics::define()
 #' @return data.frame with calculated metrics
 #'
 #' @examples
