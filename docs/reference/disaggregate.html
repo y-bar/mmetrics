@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define metrics — metrics • mmetrics</title>
+<title>Disaggregate metrics defined as aggregate function — disaggregate • mmetrics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Define metrics — metrics" />
+<meta property="og:title" content="Disaggregate metrics defined as aggregate function — disaggregate" />
 
-<meta property="og:description" content="This helper is just synonum for rlang::quos intended to provide seamless experience for package user." />
+<meta property="og:description" content="Disaggregate metrics defined as aggregate function" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -111,43 +111,61 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define metrics</h1>
+    <h1>Disaggregate metrics defined as aggregate function</h1>
     <small class="dont-index">Source: <a href='https://github.com/shinichi-takayanagi/mmetrics/blob/master/R/mmetrics.R'><code>R/mmetrics.R</code></a></small>
-    <div class="hidden name"><code>metrics.Rd</code></div>
+    <div class="hidden name"><code>disaggregate.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This helper is just synonum for <a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::quos</a> intended to provide seamless experience for package user.</p>
+    <p>Disaggregate metrics defined as aggregate function</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>metrics</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>disaggregate</span>(<span class='no'>metrics</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Metrics definition.</p>
-<p>These arguments are automatically <a href='https://rlang.r-lib.org/reference/quotation.html'>quoted</a>
-and <a href='https://rlang.r-lib.org/reference/eval_tidy.html'>evaluated</a> in the context of the data frame.</p></td>
+      <th>metrics</th>
+      <td><p>metrics defined by mmetrics::define()</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p><a href='https://rlang.r-lib.org/reference/quotation.html'>quos</a>, <a href='https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html'>dplyr's vignettes</a></p></div>
+    <p>disaggregated metrics (rlang::quosure or rlang::quosures)</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='no'>metrics</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/define'>define</a></span>(
+  <span class='kw'>cost</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>cost</span>),
+  <span class='kw'>ctr</span>  <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>click</span>)/<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>impression</span>)
+)
+
+<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/disaggregate'>disaggregate</a></span>(<span class='no'>metrics</span>)</div><div class='output co'>#&gt; $cost
+#&gt; <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+#&gt; expr: </span><span style='color: #0000BB;'>^cost</span><span>
+#&gt; env:  </span><span style='color: #0000BB;'>0x7f9342185d20</span><span>
+#&gt; 
+#&gt; $ctr
+#&gt; </span><span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+#&gt; expr: </span><span style='color: #0000BB;'>^click / impression</span><span>
+#&gt; env:  </span><span style='color: #0000BB;'>0x7f934215f590</span><span>
+#&gt; </div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

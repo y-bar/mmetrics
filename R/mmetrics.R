@@ -20,28 +20,15 @@ define <- function(...){
   rlang::quos(...)
 }
 
-# Advertisng world metrics
-ad_metrics <- define(
-  cost = sum(cost),
-  impression = sum(impression),
-  click = sum(click),
-  conversion = sum(conversion),
-  ctr  = sum(click)/sum(impression),
-  cvr  = sum(conversion)/sum(click),
-  ctvr = sum(conversion)/sum(impression),
-  cpa  = sum(cost)/sum(conversion),
-  cpc  = sum(cost)/sum(click),
-  ecpm = sum(cost)/sum(impression) * 1000
-)
-
 #' Add metrics to data.frame
 #'
 #' Add metrics to data.frame
 #'
 #' @param df data.frame
 #' @param ... group keys
-#' @param metrics metrics
-#' @param summarize summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty
+#' @param metrics metrics defined by mmetrics::define()
+#' @param summarize summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.
+#'
 #' @return data.frame with calculated metrics
 #'
 #' @examples
@@ -64,21 +51,74 @@ ad_metrics <- define(
 #' mmetrics::add(df, gender, metrics = metrics)
 #'
 #' @export
-add <- function(df, ..., metrics = ad_metrics, summarize = FALSE){
+add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
   group_vars <- rlang::enquos(...)
+
   if(length(group_vars) == 0 && !summarize){
-    variable_names <- unique(purrr::reduce(purrr::map(metrics, extract_variable_name), c))
-    colnames <- names(df)
-    keys <- colnames[!(colnames %in% variable_names)]
-    group_vars <- rlang::syms(keys)
+    warning("disaggregate() called inside. See the result of disaggregate(metrics) to check wether output metrics is what you want.")
+    dplyr::mutate(df, !!!disaggregate(metrics))
+  } else{
+    df %>%
+      dplyr::group_by(!!!group_vars) %>%
+      dplyr::summarise(!!!metrics) %>%
+      dplyr::ungroup()
   }
-  df %>%
-    dplyr::group_by(!!!group_vars) %>%
-    dplyr::summarise(!!!metrics) %>%
-    dplyr::ungroup()
 }
 
-extract_variable_name <- function(quosure)
-{
-  stringr::str_extract_all(rlang::quo_text(quosure), "\\w+")[[1]]
+allowed_operators <- list(
+  quote(`+`),
+  quote(`%*%`),
+  quote(`%%`),
+  quote(`-`),
+  quote(`/`),
+  quote(`*`)
+)
+
+disaggregate_ <- function(x, is_top) {
+  if(is_top){x <- rlang::quo_squash(x)}
+  if(length(x) == 1){return(x)}
+
+  call_name <- x[[1]]
+  call_args <- x[-1]
+
+  if (!any(purrr::map_lgl(allowed_operators, ~ identical(.x, call_name)))){
+    # Remove function, only first level aggregate function is removed
+    x[[1]] <- NULL
+    if(is_top){
+      return(rlang::quo(!!x[[1]]))
+    } else{
+      return(x[[1]])
+    }
+  }
+
+  x[-1] <- purrr::map(call_args, ~ disaggregate_(.x, FALSE))
+  rlang::quo(!!x)
 }
+
+#' Disaggregate metrics defined as aggregate function
+#'
+#' Disaggregate metrics defined as aggregate function
+#'
+#' @param metrics metrics defined by mmetrics::define()
+#' @return disaggregated metrics (rlang::quosure or rlang::quosures)
+#'
+#' @examples
+#'
+#' metrics <- mmetrics::define(
+#'   cost = sum(cost),
+#'   ctr  = sum(click)/sum(impression)
+#' )
+#'
+#' mmetrics::disaggregate(metrics)
+#'
+#' @export
+disaggregate <- function(metrics){
+  if(rlang::is_quosures(metrics)){
+    purrr::map(metrics, ~ disaggregate_(.x, TRUE))
+  } else if(rlang::is_quosure(metrics)){
+    disaggregate_(metrics, TRUE)
+  } else{
+    stop("metrics must be quosure or quores")
+  }
+}
+

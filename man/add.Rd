@@ -4,16 +4,16 @@
 \alias{add}
 \title{Add metrics to data.frame}
 \usage{
-add(df, ..., metrics = ad_metrics, summarize = FALSE)
+add(df, ..., metrics = ad_metrics, summarize = TRUE)
 }
 \arguments{
 \item{df}{data.frame}
 
 \item{...}{group keys}
 
-\item{metrics}{metrics}
+\item{metrics}{metrics defined by mmetrics::define()}
 
-\item{summarize}{summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty}
+\item{summarize}{summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.}
 }
 \value{
 data.frame with calculated metrics

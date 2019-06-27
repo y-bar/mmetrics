@@ -12,12 +12,17 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 ## Installation
 
+You can install the released version of {mmetrics} from CRAN with:
+
 ``` r
 install.packages("mmetrics")
+```
 
-# Or the development version from GitHub:
-# install.packages("devtools")
-devtools::install_github("shinichi-takayanagi/mmetrics")
+Or install the development version from github with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("shinichi-takayanagi/mmetrics")
 ```
 
 ## Example
