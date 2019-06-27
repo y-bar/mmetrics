@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mmetrics
+# mmetrics <a href='https://shinichi-takayanagi.github.io/mmetrics/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![Travis-CI Build
 Status](https://api.travis-ci.com/shinichi-takayanagi/mmetrics.svg?branch=master)](https://travis-ci.com/shinichi-takayanagi/mmetrics)
@@ -9,6 +9,8 @@ Status](https://api.travis-ci.com/shinichi-takayanagi/mmetrics.svg?branch=master
 [![codecov](https://codecov.io/github/shinichi-takayanagi/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/shinichi-takayanagi/mmetrics)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+Easy Computation of Marketing Metrics with Different Analysis Axis.
 
 ## Installation
 
