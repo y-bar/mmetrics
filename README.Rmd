@@ -20,6 +20,8 @@ options(knitr.table.format = 'markdown')
 [![codecov](https://codecov.io/github/shinichi-takayanagi/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/shinichi-takayanagi/mmetrics) 
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
+Easy Computation of Marketing Metrics with Different Analysis Axis.
+
 ## Installation
 
 You can install the released version of {mmetrics} from CRAN with:

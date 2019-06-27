@@ -22,7 +22,6 @@ metrics <- mmetrics::define(
   ctr  = sum(click)/sum(impression)
 )
 
-# Evaluate
 mmetrics::disaggregate(metrics)
 
 }
