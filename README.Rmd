@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 options(knitr.table.format = 'markdown')
 ```
 
-# mmetrics
+# mmetrics <a href='https://shinichi-takayanagi.github.io/mmetrics/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![Travis-CI Build Status](https://api.travis-ci.com/shinichi-takayanagi/mmetrics.svg?branch=master)](https://travis-ci.com/shinichi-takayanagi/mmetrics) 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
