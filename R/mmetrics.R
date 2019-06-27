@@ -27,6 +27,8 @@ define <- function(...){
 #' @param df data.frame
 #' @param ... group keys
 #' @param metrics metrics defined by mmetrics::define()
+#' @param summarize summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.
+#'
 #' @return data.frame with calculated metrics
 #'
 #' @examples

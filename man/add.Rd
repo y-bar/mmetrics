@@ -12,6 +12,8 @@ add(df, ..., metrics = ad_metrics, summarize = TRUE)
 \item{...}{group keys}
 
 \item{metrics}{metrics defined by mmetrics::define()}
+
+\item{summarize}{summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.}
 }
 \value{
 data.frame with calculated metrics
