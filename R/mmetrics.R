@@ -55,7 +55,7 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
   group_vars <- rlang::enquos(...)
 
   if(length(group_vars) == 0 && !summarize){
-    warning("disaggregate() called inside. See the result of disaggregate(metrics) to check wether output metrics is what you want.")
+    warning("disaggregate() called inside. See the result of disaggregate(metrics) to check whether output metrics is what you want.")
     dplyr::mutate(df, !!!disaggregate(metrics))
   } else{
     df %>%

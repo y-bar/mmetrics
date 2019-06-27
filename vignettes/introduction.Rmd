@@ -69,7 +69,7 @@ mmetrics::add(df, metrics = metrics, summarize = FALSE)
 ```
 
 In this situation, `mmetrics::disaggregate()` is used inside to disaggregate metrics.
-See the result of `disaggregate(metrics)` to check wether output metrics is what you want.
+See the result of `disaggregate(metrics)` to check whether output metrics is what you want.
 ```{r}
 mmetrics::disaggregate(metrics)
 ```
