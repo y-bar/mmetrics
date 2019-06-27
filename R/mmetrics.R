@@ -109,7 +109,6 @@ disaggregate_ <- function(x, is_top) {
 #'   ctr  = sum(click)/sum(impression)
 #' )
 #'
-#' # Evaluate
 #' mmetrics::disaggregate(metrics)
 #'
 #' @export
@@ -119,7 +118,7 @@ disaggregate <- function(metrics){
   } else if(rlang::is_quosure(metrics)){
     disaggregate_(metrics, TRUE)
   } else{
-    stop("")
+    stop("metrics must be quosure or quores")
   }
 }
 
