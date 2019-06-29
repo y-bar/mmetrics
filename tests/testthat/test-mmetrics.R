@@ -22,13 +22,13 @@ test_that("define metrics", {
 test_that("summarize one key", {
   df_expected <- dplyr::group_by(df, gender) %>%
     dplyr::summarise(cost=sum(cost), ctr=sum(click)/sum(impression))
-  expect_equal(add(df, gender, metrics = metrics), df_expected)
+  expect_equal(add(df, gender, metrics = metrics, summarize = TRUE), df_expected)
 })
 
 test_that("summarize two keys", {
   df_expected <- dplyr::group_by(df, gender, age) %>%
     dplyr::summarise(cost=sum(cost), ctr=sum(click)/sum(impression))
-  expect_equal(add(df, gender, age, metrics = metrics), df_expected)
+  expect_equal(add(df, gender, age, metrics = metrics, summarize = TRUE), df_expected)
 })
 
 test_that("summarize all", {
@@ -36,9 +36,21 @@ test_that("summarize all", {
   expect_equal(add(df, metrics = metrics), df_expected)
 })
 
-test_that("summarize all with summarize = FALSE", {
-  df_expected <- dplyr::mutate(df, cost=cost, ctr=click/impression)
-  expect_warning(expect_equal(add(df, metrics = metrics, summarize = FALSE), df_expected))
+test_that("mutate one key", {
+  df_expected <- dplyr::group_by(df, gender) %>%
+    dplyr::mutate(cost=sum(cost), ctr=sum(click)/sum(impression))
+  expect_equal(add(df, gender, metrics = metrics, summarize = FALSE), df_expected)
+})
+
+test_that("mutate two keys", {
+  df_expected <- dplyr::group_by(df, gender, age) %>%
+    dplyr::mutate(cost=sum(cost), ctr=sum(click)/sum(impression))
+  expect_equal(add(df, gender, age, metrics = metrics, summarize = FALSE), df_expected)
+})
+
+test_that("mutate all", {
+  df_expected <- dplyr::mutate(df, cost=sum(cost), ctr=sum(click)/sum(impression))
+  expect_equal(add(df, metrics = metrics, summarize=FALSE), df_expected)
 })
 
 test_that("disaggregate for quosure (x/y)", {

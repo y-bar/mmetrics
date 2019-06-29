@@ -58,20 +58,18 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
   group_vars <- rlang::enquos(...)
 
   if(summarize){
-    tryCatch({
-      gsummarize(df, !!!group_vars, metrics = metrics)
-    }, error = function(e) {
-      warning("
-        disaggregate() called inside.
-        See the result of disaggregate(metrics) to check whether output metrics is what you want.
-      ")
-      gmutate(df, !!!disaggregate(metrics))
-    })
+    gsummarize(df, !!!group_vars, metrics = metrics)
   } else{
-    gmutate(df, metrics = metrics)
+    tryCatch({
+      gmutate(df, !!!group_vars, metrics = metrics)
+    }, error = function(e) {
+      warning("disaggregate() called inside. See the result of disaggregate(metrics) to check whether output metrics is what you want.")
+      gmutate(df, !!!group_vars, metrics = !!!disaggregate(metrics))
+    })
   }
 }
 
+#' @export
 gsummarize <- function(df, ..., metrics){
   group_vars <- rlang::enquos(...)
   df %>%
@@ -81,6 +79,7 @@ gsummarize <- function(df, ..., metrics){
 }
 gsummarise <- gsummarize
 
+#' @export
 gmutate <- function(df, ..., metrics){
   group_vars <- rlang::enquos(...)
   df %>%
