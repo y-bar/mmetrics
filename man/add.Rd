@@ -2,9 +2,18 @@
 % Please edit documentation in R/mmetrics.R
 \name{add}
 \alias{add}
+\alias{gsummarize}
+\alias{gsummarise}
+\alias{gmutate}
 \title{Add metrics to data.frame}
 \usage{
 add(df, ..., metrics = ad_metrics, summarize = TRUE)
+
+gsummarize(df, ..., metrics)
+
+gsummarise(df, ..., metrics)
+
+gmutate(df, ..., metrics)
 }
 \arguments{
 \item{df}{data.frame}
@@ -13,7 +22,7 @@ add(df, ..., metrics = ad_metrics, summarize = TRUE)
 
 \item{metrics}{metrics defined by mmetrics::define()}
 
-\item{summarize}{summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.}
+\item{summarize}{summarize data (\code{gsummarize()} called inside) or not (\code{gmutate()} called inside).}
 }
 \value{
 data.frame with calculated metrics

@@ -30,7 +30,7 @@ define <- function(...){
 #' @param df data.frame
 #' @param ... group keys
 #' @param metrics metrics defined by mmetrics::define()
-#' @param summarize summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.
+#' @param summarize summarize data (`gsummarize()` called inside) or not (`gmutate()` called inside).
 #'
 #' @return data.frame with calculated metrics
 #'
@@ -69,6 +69,7 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
   }
 }
 
+#' @rdname add
 #' @export
 gsummarize <- function(df, ..., metrics){
   group_vars <- rlang::enquos(...)
@@ -77,8 +78,10 @@ gsummarize <- function(df, ..., metrics){
     dplyr::summarise(!!!metrics) %>%
     dplyr::ungroup()
 }
+#' @rdname add
 gsummarise <- gsummarize
 
+#' @rdname add
 #' @export
 gmutate <- function(df, ..., metrics){
   group_vars <- rlang::enquos(...)
