@@ -61,6 +61,7 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
     gsummarize(df, !!!group_vars, metrics = metrics)
   } else{
     tryCatch({
+      gsummarize(df, !!!group_vars, metrics = metrics)
       gmutate(df, !!!group_vars, metrics = metrics)
     }, error = function(e) {
       warning("disaggregate() called inside. See the result of disaggregate(metrics) to check whether output metrics is what you want.")
