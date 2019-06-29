@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 This vignette shows you how to use `{mmetrics}` package.
 
 ## Create Dummy Data
+
 First, we create dummy data for this example.
 ```{r}
 # Dummy data
@@ -58,18 +59,12 @@ mmetrics::add(df, gender, age, metrics = metrics)
 ```
 
 ### mmetrics::add() without any grouping keys
-Summarize all data when you do not specify any grouping keys.
+If we do not specify any grouping keys, `mmetrics::add()` behave like `dplyr::mutate()` as a default option.
 ```{r}
 mmetrics::add(df, metrics = metrics)
 ```
 
-When you set `summarize = FALSE` , `mmetrics::add()` behave like `dplyr::mutate()`.
+If we want to summarize all data, change `summarize` argument to `TRUE`.
 ```{r}
-mmetrics::add(df, metrics = metrics, summarize = FALSE)
-```
-
-In this situation, `mmetrics::disaggregate()` is used inside to disaggregate metrics.
-See the result of `disaggregate(metrics)` to check whether output metrics is what you want.
-```{r}
-mmetrics::disaggregate(metrics)
+mmetrics::add(df, metrics = metrics, summarize = TRUE)
 ```
