@@ -78,5 +78,8 @@ test_that("disaggregate for quosures", {
 })
 
 test_that("disaggregate should fail when arguemnt is not quosure(s)", {
-  expect_error(disaggregate("hoge"), "metrics must be quosure or quores")
+  message <- "metrics must be quosure or quores"
+  expect_error(disaggregate("hoge"), message)
+  expect_error(disaggregate(NULL), message)
+  expect_error(disaggregate(1:10), message)
 })
