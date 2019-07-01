@@ -124,7 +124,13 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>add</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>ad_metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>add</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>ad_metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>gsummarize</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>)
+
+<span class='fu'>gsummarise</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>)
+
+<span class='fu'>gmutate</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,7 +149,7 @@
     </tr>
     <tr>
       <th>summarize</th>
-      <td><p>summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.</p></td>
+      <td><p>summarize data (<code>gsummarize()</code> called inside) or not (<code>gmutate()</code> called inside).</p></td>
     </tr>
     </table>
     

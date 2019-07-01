@@ -64,21 +64,45 @@ If we do not specify any grouping keys, `mmetrics::add()` summarize all data as 
 mmetrics::add(df, metrics = metrics)
 ```
 
-If we want to `mmetrics::add()` behave like `dplyr::mutate()` use `mmetrics::disaggregate()`.
+If we want `mmetrics::add()` to behave like `dplyr::mutate()` use `mmetrics::disaggregate()`.
+```{r}
+mmetrics::add(df, metrics = mmetrics::disaggregate(metrics), summarize = FALSE)
+```
+
+
+### Remove aggregate function from metrics using `mmetrics::disaggregate()`
+It is hassle for users to re-define metrics when you would like to use these for `dplyr::mutate()`.
+In this case, you can use `mmetrics::disaggregate()` to remove *the first aggregation function* for the argument and return disaggregated metrics.
 ```{r}
 metrics_disaggregated <- mmetrics::disaggregate(metrics)
-mmetrics::add(df, metrics = metrics_disaggregated, summarize = FALSE)
+# Woo! sum() are removed!!!
+print(metrics_disaggregated)
 ```
 
-`mmetrics::disaggregate()` remove *the first aggregation function* for the argument and return disaggregated metrics.
+You can use these metrics for `dplyr::mutate()`
 ```{r}
-mmetrics::disaggregate(metrics)
+dplyr::mutate(df, !!!metrics_disaggregated)
 ```
 
-Using `mmetrics::disaggregate()`, we do not need to re-define metrics for `dplyr::mutate()`.
-
+...or, you can use `mmetrics::gmutate()` defind in our package.
+```{r}
+mmetrics::gmutate(df, metrics = metrics_disaggregated)
+```
 
 ## gmutate() and gsummarize()
 
 `mmetrics::add()` is a just wrapper function for `mmetrics::gmutate()` and `mmetrics::gsummarize()`.
 We can use these functions directly instead of `mmetrics::add()`.
+
+```{r}
+# Completely the same result with mmetrics::add(df, gender, metrics = metrics)
+mmetrics::gsummarize(df, gender, metrics = metrics)
+```
+
+
+`metrics::gmutate()` is useful to calculate the metrics like "ratio in a group".
+```{r}
+# Cost ratio in each gender group
+mmetrics::gmutate(df, gender, metrics = mmetrics::define(cost_ratio = cost/sum(cost)))
+```
+
