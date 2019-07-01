@@ -64,10 +64,17 @@ mmetrics::add(df, gender, metrics = metrics)
 ### Remove aggregate function from metrics using `mmetrics::disaggregate()`
 It is hassle for users to re-define metrics when you would like to use these for `dplyr::mutate()`.
 In this case, you can use `mmetrics::disaggregate()` to remove *the first aggregation function* for the argument and return disaggregated metrics.
+
 ```{r}
+# Original metrics. sum() is used for this metrics
+metrics
+```
+
+```{r}
+# Disaggregate metrics!
 metrics_disaggregated <- mmetrics::disaggregate(metrics)
 # Woo! sum() are removed!!!
-print(metrics_disaggregated)
+metrics_disaggregated
 ```
 
 You can use these metrics with `dplyr::mutate()` for row-wise metrics computation.
