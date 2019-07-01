@@ -1,14 +1,6 @@
 context("test-mmetrics")
 
-df <- data.frame(
-  gender = rep(c("M", "F"), 2),
-  age = (2:5)*10,
-  cost = c(51:54),
-  impression = c(101:104),
-  click = c(0:3)*3,
-  conversion = c(0:3),
-  stringsAsFactors = FALSE
-)
+df <- dummy_data
 
 metrics <- define(
   cost = sum(cost),

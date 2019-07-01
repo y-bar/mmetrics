@@ -29,29 +29,24 @@ remotes::install_github("shinichi-takayanagi/mmetrics")
 
 ## Example
 
-### Create Dummy data
+### Load Dummy data
 
-First, we create dummy data for this example.
+First, we load dummy data from {mmetrics} package for this example.
 
 ``` r
-# Dummy data
-df <- data.frame(
-  gender = rep(c("M", "F"), 5),
-  age = (1:10)*10,
-  cost = c(51:60),
-  impression = c(101:110),
-  click = c(0:9)*3,
-  conversion = c(0:9)
-)
-
-head(df)
-#>   gender age cost impression click conversion
-#> 1      M  10   51        101     0          0
-#> 2      F  20   52        102     3          1
-#> 3      M  30   53        103     6          2
-#> 4      F  40   54        104     9          3
-#> 5      M  50   55        105    12          4
-#> 6      F  60   56        106    15          5
+df <- mmetrics::dummy_data
+df
+#>    gender age cost impression click conversion
+#> 1       M  10   51        101     0          0
+#> 2       F  20   52        102     3          1
+#> 3       M  30   53        103     6          2
+#> 4       F  40   54        104     9          3
+#> 5       M  50   55        105    12          4
+#> 6       F  60   56        106    15          5
+#> 7       M  70   57        107    18          6
+#> 8       F  80   58        108    21          7
+#> 9       M  90   59        109    24          8
+#> 10      F 100   60        110    27          9
 ```
 
 ### Define metrics
@@ -62,7 +57,7 @@ As a next step, we define metrics to evaluate using `mmetrics::define`.
 # Example metrics
 metrics <- mmetrics::define(
   cost = sum(cost),
-  ctr  = sum(click)/sum(impression)
+  ctr  = sum(click)/sum(impression) # CTR, Click Through Rate 
 )
 ```
 
@@ -94,15 +89,16 @@ print(metrics_disaggregated)
 #> $cost
 #> <quosure>
 #> expr: ^cost
-#> env:  000000001254E0D0
+#> env:  00000000180BC490
 #> 
 #> $ctr
 #> <quosure>
 #> expr: ^click / impression
-#> env:  0000000012572568
+#> env:  00000000180DABD8
 ```
 
-You can use these metrics for `dplyr::mutate()`
+You can use these metrics with `dplyr::mutate()` for row-wise metrics
+computation.
 
 ``` r
 dplyr::mutate(df, !!!metrics_disaggregated)
@@ -119,7 +115,9 @@ dplyr::mutate(df, !!!metrics_disaggregated)
 #> 10      F 100   60        110    27          9 0.24545455
 ```
 
-…or, you can use `mmetrics::gmutate()` defind in our package.
+…or, you can do the same compucation using `mmetrics::gmutate()` defind
+in our package. In this case, you do not need to write `!!!`
+(bang-bang-bang) operator explicitly.
 
 ``` r
 mmetrics::gmutate(df, metrics = metrics_disaggregated)
