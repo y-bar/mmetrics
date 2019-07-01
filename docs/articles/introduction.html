@@ -92,25 +92,21 @@
 <div id="create-dummy-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-dummy-data" class="anchor"></a>Create Dummy Data</h2>
-<p>First, we create dummy data for this example.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Dummy data</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="dt">gender =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"M"</span>, <span class="st">"F"</span>), <span class="dv">5</span>),</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">age =</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)<span class="op">*</span><span class="dv">10</span>,</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="dt">cost =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">51</span><span class="op">:</span><span class="dv">60</span>),</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="dt">impression =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">101</span><span class="op">:</span><span class="dv">110</span>),</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="dt">click =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>)<span class="op">*</span><span class="dv">3</span>,</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="dt">conversion =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(df)</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt;   gender age cost impression click conversion</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt; 1      M  10   51        101     0          0</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt; 2      F  20   52        102     3          1</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co">#&gt; 3      M  30   53        103     6          2</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#&gt; 4      F  40   54        104     9          3</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co">#&gt; 5      M  50   55        105    12          4</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt; 6      F  60   56        106    15          5</span></span></code></pre></div>
+<p>First, we load dummy data from {mmetrics} package for this example.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load dummy data</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>df &lt;-<span class="st"> </span>mmetrics<span class="op">::</span>dummy_data</span>
+<span id="cb1-3"><a href="#cb1-3"></a>df</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt;    gender age cost impression click conversion</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; 1       M  10   51        101     0          0</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt; 2       F  20   52        102     3          1</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt; 3       M  30   53        103     6          2</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt; 4       F  40   54        104     9          3</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt; 5       M  50   55        105    12          4</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; 6       F  60   56        106    15          5</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt; 7       M  70   57        107    18          6</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt; 8       F  80   58        108    21          7</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt; 9       M  90   59        109    24          8</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt; 10      F 100   60        110    27          9</span></span></code></pre></div>
 </div>
 <div id="define-metrics" class="section level2">
 <h2 class="hasAnchor">
@@ -191,13 +187,13 @@
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; $cost</span></span>
 <span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; expr: ^cost</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; env:  0000000019127120</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; env:  0000000019069D88</span></span>
 <span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; </span></span>
 <span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; $ctr</span></span>
 <span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
 <span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; expr: ^click / impression</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; env:  0000000019142198</span></span></code></pre></div>
-<p>You can use these metrics for <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code></p>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; env:  0000000019085538</span></span></code></pre></div>
+<p>You can use these metrics with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> for row-wise metrics computation.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(df, <span class="op">!!!</span>metrics_disaggregated)</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt;    gender age cost impression click conversion        ctr</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; 1       M  10   51        101     0          0 0.00000000</span></span>
@@ -210,7 +206,7 @@
 <span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 8       F  80   58        108    21          7 0.19444444</span></span>
 <span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 9       M  90   59        109    24          8 0.22018349</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 10      F 100   60        110    27          9 0.24545455</span></span></code></pre></div>
-<p>…or, you can use <code><a href="../reference/add.html">mmetrics::gmutate()</a></code> defind in our package.</p>
+<p>…or, you can do the same compucation using <code><a href="../reference/add.html">mmetrics::gmutate()</a></code> defind in our package. In this case, you do not need to write <code>!!!</code> (bang-bang-bang) operator explicitly.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">gmutate</a></span>(df, <span class="dt">metrics =</span> metrics_disaggregated)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; # A tibble: 10 x 7</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;    gender   age  cost impression click conversion    ctr</span></span>

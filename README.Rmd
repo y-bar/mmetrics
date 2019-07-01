@@ -38,20 +38,11 @@ remotes::install_github("shinichi-takayanagi/mmetrics")
 ```
 
 ## Example
-### Create Dummy data
-First, we create dummy data for this example.
+### Load Dummy data
+First, we load dummy data from {mmetrics} package for this example.
 ```{r}
-# Dummy data
-df <- data.frame(
-  gender = rep(c("M", "F"), 5),
-  age = (1:10)*10,
-  cost = c(51:60),
-  impression = c(101:110),
-  click = c(0:9)*3,
-  conversion = c(0:9)
-)
-
-head(df)
+df <- mmetrics::dummy_data
+df
 ```
 
 ### Define metrics
@@ -60,7 +51,7 @@ As a next step, we define metrics to evaluate using `mmetrics::define`.
 # Example metrics
 metrics <- mmetrics::define(
   cost = sum(cost),
-  ctr  = sum(click)/sum(impression)
+  ctr  = sum(click)/sum(impression) # CTR, Click Through Rate 
 )
 ```
 
@@ -79,12 +70,13 @@ metrics_disaggregated <- mmetrics::disaggregate(metrics)
 print(metrics_disaggregated)
 ```
 
-You can use these metrics for `dplyr::mutate()`
+You can use these metrics with `dplyr::mutate()` for row-wise metrics computation.
 ```{r}
 dplyr::mutate(df, !!!metrics_disaggregated)
 ```
 
-...or, you can use `mmetrics::gmutate()` defind in our package.
+...or, you can do the same compucation using `mmetrics::gmutate()` defind in our package.
+In this case, you do not need to write `!!!` (bang-bang-bang) operator explicitly.
 ```{r}
 mmetrics::gmutate(df, metrics = metrics_disaggregated)
 ```

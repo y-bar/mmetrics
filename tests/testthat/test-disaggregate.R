@@ -1,14 +1,6 @@
 context("test-disaggregate")
 
-df <- data.frame(
-  gender = rep(c("M", "F"), 2),
-  age = (2:5)*10,
-  cost = c(51:54),
-  impression = c(101:104),
-  click = c(0:3)*3,
-  conversion = c(0:3),
-  stringsAsFactors = FALSE
-)
+df <- dummy_data
 
 metrics <- define(
   cost = sum(cost),
@@ -22,7 +14,7 @@ test_that("disaggregate for quosure (x/y)", {
   # Check except for column name
   expect_true(all.equal(df_expected, df_tested, check.names = FALSE))
   # Check format
-  #expect_equal(rlang::quo_text(disaggregate(metrics[["ctr"]]), "click/impression"))
+  expect_equal(rlang::quo_text(disaggregate(metrics[["ctr"]])), "click/impression")
 })
 
 test_that("disaggregate for quosure (x)", {
