@@ -72,7 +72,7 @@ mmetrics::add(df, metrics = metrics_disaggregated, summarize = FALSE)
 
 `mmetrics::disaggregate()` remove *the first aggregation function* for the argument and return disaggregated metrics.
 ```{r}
-disaggregate(metrics)
+mmetrics::disaggregate(metrics)
 ```
 
 Using `mmetrics::disaggregate()`, we do not need to re-define metrics for `dplyr::mutate()`.
