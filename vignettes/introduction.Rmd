@@ -14,10 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Introduction
+Are you boring of repeated tabulation work? This package is for you.
+With this package, you can reuse metrics which you define and easily do tabulation work on different analysis axes.
+Focus on more productive things with this package! Have a wonderful life!
 
-This vignette shows you how to use `{mmetrics}` package.
-
-## Create Dummy Data
+## Load Dummy Data
 
 First, we load dummy data from {mmetrics} package for this example.
 ```{r}
@@ -66,10 +68,17 @@ mmetrics::add(df, metrics = mmetrics::disaggregate(metrics), summarize = FALSE)
 ### Remove aggregate function from metrics using `mmetrics::disaggregate()`
 It is hassle for users to re-define metrics when you would like to use these for `dplyr::mutate()`.
 In this case, you can use `mmetrics::disaggregate()` to remove *the first aggregation function* for the argument and return disaggregated metrics.
+
 ```{r}
+# Original metrics. sum() is used for this metrics
+metrics
+```
+
+```{r}
+# Disaggregate metrics!
 metrics_disaggregated <- mmetrics::disaggregate(metrics)
 # Woo! sum() are removed!!!
-print(metrics_disaggregated)
+metrics_disaggregated
 ```
 
 You can use these metrics with `dplyr::mutate()` for row-wise metrics computation.
