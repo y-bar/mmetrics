@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 This vignette shows you how to use `{mmetrics}` package.
 
 ## Create Dummy Data
+
 First, we create dummy data for this example.
 ```{r}
 # Dummy data
@@ -58,18 +59,26 @@ mmetrics::add(df, gender, age, metrics = metrics)
 ```
 
 ### mmetrics::add() without any grouping keys
-Summarize all data when you do not specify any grouping keys.
+If we do not specify any grouping keys, `mmetrics::add()` summarize all data as a default option.
 ```{r}
 mmetrics::add(df, metrics = metrics)
 ```
 
-When you set `summarize = FALSE` , `mmetrics::add()` behave like `dplyr::mutate()`.
+If we want to `mmetrics::add()` behave like `dplyr::mutate()` use `mmetrics::disaggregate()`.
 ```{r}
-mmetrics::add(df, metrics = metrics, summarize = FALSE)
+metrics_disaggregated <- mmetrics::disaggregate(metrics)
+mmetrics::add(df, metrics = metrics_disaggregated, summarize = FALSE)
 ```
 
-In this situation, `mmetrics::disaggregate()` is used inside to disaggregate metrics.
-See the result of `disaggregate(metrics)` to check whether output metrics is what you want.
+`mmetrics::disaggregate()` remove *the first aggregation function* for the argument and return disaggregated metrics.
 ```{r}
 mmetrics::disaggregate(metrics)
 ```
+
+Using `mmetrics::disaggregate()`, we do not need to re-define metrics for `dplyr::mutate()`.
+
+
+## gmutate() and gsummarize()
+
+`mmetrics::add()` is a just wrapper function for `mmetrics::gmutate()` and `mmetrics::gsummarize()`.
+We can use these functions directly instead of `mmetrics::add()`.

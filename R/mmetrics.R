@@ -1,3 +1,6 @@
+#' @include disaggregate.R
+NULL
+
 # To use these operators inside this package, we have to do like this
 `%>%` <- magrittr::`%>%`
 `!!!` <- rlang::`!!!`
@@ -27,7 +30,7 @@ define <- function(...){
 #' @param df data.frame
 #' @param ... group keys
 #' @param metrics metrics defined by mmetrics::define()
-#' @param summarize summarize all data or not (mutate compatible behavior) when group keys (thee dots) are empty.
+#' @param summarize summarize data (`gsummarize()` called inside) or not (`gmutate()` called inside).
 #'
 #' @return data.frame with calculated metrics
 #'
@@ -54,71 +57,31 @@ define <- function(...){
 add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
   group_vars <- rlang::enquos(...)
 
-  if(length(group_vars) == 0 && !summarize){
-    warning("disaggregate() called inside. See the result of disaggregate(metrics) to check whether output metrics is what you want.")
-    dplyr::mutate(df, !!!disaggregate(metrics))
+  if(summarize){
+    gsummarize(df, !!!group_vars, metrics = metrics)
   } else{
-    df %>%
-      dplyr::group_by(!!!group_vars) %>%
-      dplyr::summarise(!!!metrics) %>%
-      dplyr::ungroup()
+    gmutate(df, !!!group_vars, metrics = metrics)
   }
 }
 
-allowed_operators <- list(
-  quote(`+`),
-  quote(`%*%`),
-  quote(`%%`),
-  quote(`-`),
-  quote(`/`),
-  quote(`*`)
-)
-
-disaggregate_ <- function(x, is_top) {
-  if(is_top){x <- rlang::quo_squash(x)}
-  if(length(x) == 1){return(x)}
-
-  call_name <- x[[1]]
-  call_args <- x[-1]
-
-  if (!any(purrr::map_lgl(allowed_operators, ~ identical(.x, call_name)))){
-    # Remove function, only first level aggregate function is removed
-    x[[1]] <- NULL
-    if(is_top){
-      return(rlang::quo(!!x[[1]]))
-    } else{
-      return(x[[1]])
-    }
-  }
-
-  x[-1] <- purrr::map(call_args, ~ disaggregate_(.x, FALSE))
-  rlang::quo(!!x)
-}
-
-#' Disaggregate metrics defined as aggregate function
-#'
-#' Disaggregate metrics defined as aggregate function
-#'
-#' @param metrics metrics defined by mmetrics::define()
-#' @return disaggregated metrics (rlang::quosure or rlang::quosures)
-#'
-#' @examples
-#'
-#' metrics <- mmetrics::define(
-#'   cost = sum(cost),
-#'   ctr  = sum(click)/sum(impression)
-#' )
-#'
-#' mmetrics::disaggregate(metrics)
-#'
+#' @rdname add
 #' @export
-disaggregate <- function(metrics){
-  if(rlang::is_quosures(metrics)){
-    purrr::map(metrics, ~ disaggregate_(.x, TRUE))
-  } else if(rlang::is_quosure(metrics)){
-    disaggregate_(metrics, TRUE)
-  } else{
-    stop("metrics must be quosure or quores")
-  }
+gsummarize <- function(df, ..., metrics){
+  group_vars <- rlang::enquos(...)
+  df %>%
+    dplyr::group_by(!!!group_vars) %>%
+    dplyr::summarise(!!!metrics) %>%
+    dplyr::ungroup()
 }
+#' @rdname add
+gsummarise <- gsummarize
 
+#' @rdname add
+#' @export
+gmutate <- function(df, ..., metrics){
+  group_vars <- rlang::enquos(...)
+  df %>%
+    dplyr::group_by(!!!group_vars) %>%
+    dplyr::mutate(!!!metrics) %>%
+    dplyr::ungroup()
+}

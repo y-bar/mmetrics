@@ -31,5 +31,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Collate: 
+    'disaggregate.R'
     'mmetrics.R'
     'metrics_definition.R'

@@ -1,4 +1,5 @@
 #' @include mmetrics.R
+NULL
 
 # Advertisng world metrics
 ad_metrics <- define(
