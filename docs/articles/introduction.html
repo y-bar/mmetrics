@@ -158,42 +158,80 @@
 <div id="mmetricsadd-without-any-grouping-keys" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mmetricsadd-without-any-grouping-keys" class="anchor"></a>mmetrics::add() without any grouping keys</h3>
-<p>Summarize all data when you do not specify any grouping keys.</p>
+<p>If we do not specify any grouping keys, <code><a href="../reference/add.html">mmetrics::add()</a></code> summarize all data as a default option.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, <span class="dt">metrics =</span> metrics)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; # A tibble: 1 x 2</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;    cost   ctr</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 1   555 0.128</span></span></code></pre></div>
-<p>When you set <code>summarize = FALSE</code> , <code><a href="../reference/add.html">mmetrics::add()</a></code> behave like <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, <span class="dt">metrics =</span> metrics, <span class="dt">summarize =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; Warning in mmetrics::add(df, metrics = metrics, summarize = FALSE):</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; disaggregate() called inside. See the result of disaggregate(metrics) to</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; check whether output metrics is what you want.</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; # A tibble: 10 x 7</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;    gender   age  cost impression click conversion    ctr</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;int&gt;  &lt;dbl&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;  1 M         10    51        101     0          0 0     </span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;  2 F         20    52        102     3          1 0.0294</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;  3 M         30    53        103     6          2 0.0583</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;  4 F         40    54        104     9          3 0.0865</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;  5 M         50    55        105    12          4 0.114 </span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;  6 F         60    56        106    15          5 0.142 </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;  7 M         70    57        107    18          6 0.168 </span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt;  8 F         80    58        108    21          7 0.194 </span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;  9 M         90    59        109    24          8 0.220 </span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; 10 F        100    60        110    27          9 0.245</span></span></code></pre></div>
-<p>In this situation, <code><a href="../reference/disaggregate.html">mmetrics::disaggregate()</a></code> is used inside to disaggregate metrics. See the result of <code><a href="../reference/disaggregate.html">disaggregate(metrics)</a></code> to check whether output metrics is what you want.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/disaggregate">disaggregate</a></span>(metrics)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; $cost</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; expr: ^cost</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; env:  0000000019522268</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; </span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; $ctr</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; expr: ^click / impression</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; env:  000000001953FF68</span></span></code></pre></div>
+<p>If we want to <code><a href="../reference/add.html">mmetrics::add()</a></code> behave like <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> use <code><a href="../reference/disaggregate.html">mmetrics::disaggregate()</a></code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>metrics_disaggregated &lt;-<span class="st"> </span>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/disaggregate">disaggregate</a></span>(metrics)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">add</a></span>(df, <span class="dt">metrics =</span> metrics_disaggregated, <span class="dt">summarize =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; # A tibble: 10 x 7</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;    gender   age  cost impression click conversion    ctr</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;  1 M         10    51        101     0          0 0     </span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;  2 F         20    52        102     3          1 0.0294</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;  3 M         30    53        103     6          2 0.0583</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;  4 F         40    54        104     9          3 0.0865</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;  5 M         50    55        105    12          4 0.114 </span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;  6 F         60    56        106    15          5 0.142 </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;  7 M         70    57        107    18          6 0.168 </span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;  8 F         80    58        108    21          7 0.194 </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;  9 M         90    59        109    24          8 0.220 </span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; 10 F        100    60        110    27          9 0.245</span></span></code></pre></div>
 </div>
+<div id="remove-aggregate-function-from-metrics-using-mmetricsdisaggregate" class="section level3">
+<h3 class="hasAnchor">
+<a href="#remove-aggregate-function-from-metrics-using-mmetricsdisaggregate" class="anchor"></a>Remove aggregate function from metrics using <code><a href="../reference/disaggregate.html">mmetrics::disaggregate()</a></code>
+</h3>
+<p>It is hassle for users to re-define metrics when you would like to use these for <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>. In this case, you can use <code><a href="../reference/disaggregate.html">mmetrics::disaggregate()</a></code> to remove <em>the first aggregation function</em> for the argument and return disaggregated metrics.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>metrics_disaggregated &lt;-<span class="st"> </span>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/disaggregate">disaggregate</a></span>(metrics)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># Woo! sum() are removed!!!</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(metrics_disaggregated)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; $cost</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; expr: ^cost</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; env:  00000000190F7428</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; </span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; $ctr</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; expr: ^click / impression</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; env:  000000001910ED38</span></span></code></pre></div>
+<p>You can use these metrics for <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(df, <span class="op">!!!</span>metrics_disaggregated)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt;    gender age cost impression click conversion        ctr</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; 1       M  10   51        101     0          0 0.00000000</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; 2       F  20   52        102     3          1 0.02941176</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 3       M  30   53        103     6          2 0.05825243</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 4       F  40   54        104     9          3 0.08653846</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 5       M  50   55        105    12          4 0.11428571</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 6       F  60   56        106    15          5 0.14150943</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 7       M  70   57        107    18          6 0.16822430</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 8       F  80   58        108    21          7 0.19444444</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 9       M  90   59        109    24          8 0.22018349</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 10      F 100   60        110    27          9 0.24545455</span></span></code></pre></div>
+<p>…or, you can use <code><a href="../reference/add.html">mmetrics::gmutate()</a></code> defind in our package.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">gmutate</a></span>(df, <span class="dt">metrics =</span> metrics_disaggregated)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; # A tibble: 10 x 7</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;    gender   age  cost impression click conversion    ctr</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;  1 M         10    51        101     0          0 0     </span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;  2 F         20    52        102     3          1 0.0294</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;  3 M         30    53        103     6          2 0.0583</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;  4 F         40    54        104     9          3 0.0865</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  5 M         50    55        105    12          4 0.114 </span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;  6 F         60    56        106    15          5 0.142 </span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;  7 M         70    57        107    18          6 0.168 </span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;  8 F         80    58        108    21          7 0.194 </span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;  9 M         90    59        109    24          8 0.220 </span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; 10 F        100    60        110    27          9 0.245</span></span></code></pre></div>
+</div>
+</div>
+<div id="gmutate-and-gsummarize" class="section level2">
+<h2 class="hasAnchor">
+<a href="#gmutate-and-gsummarize" class="anchor"></a>gmutate() and gsummarize()</h2>
+<p><code><a href="../reference/add.html">mmetrics::add()</a></code> is a just wrapper function for <code><a href="../reference/add.html">mmetrics::gmutate()</a></code> and <code><a href="../reference/add.html">mmetrics::gsummarize()</a></code>. We can use these functions directly instead of <code><a href="../reference/add.html">mmetrics::add()</a></code>.</p>
 </div>
   </div>
 
@@ -205,6 +243,7 @@
 <li><a href="#create-dummy-data">Create Dummy Data</a></li>
       <li><a href="#define-metrics">Define metrics</a></li>
       <li><a href="#how-to-use-mmetricsadd">How to use mmetrics::add()</a></li>
+      <li><a href="#gmutate-and-gsummarize">gmutate() and gsummarize()</a></li>
       </ul>
 </div>
       </div>
