@@ -59,12 +59,26 @@ mmetrics::add(df, gender, age, metrics = metrics)
 ```
 
 ### mmetrics::add() without any grouping keys
-If we do not specify any grouping keys, `mmetrics::add()` behave like `dplyr::mutate()` as a default option.
+If we do not specify any grouping keys, `mmetrics::add()` summarize all data as a default option.
 ```{r}
 mmetrics::add(df, metrics = metrics)
 ```
 
-If we want to summarize all data, change `summarize` argument to `TRUE`.
+If we want to `mmetrics::add()` behave like `dplyr::mutate()` use `mmetrics::disaggregate()`.
 ```{r}
-mmetrics::add(df, metrics = metrics, summarize = TRUE)
+metrics_disaggregated <- disaggregate(metrics)
+mmetrics::add(df, metrics = metrics_disaggregated, summarize = FALSE)
 ```
+
+`mmetrics::disaggregate()` remove *the first aggregation function* for the argument and return disaggregated metrics.
+```{r}
+disaggregate(metrics)
+```
+
+Using `mmetrics::disaggregate()`, we do not need to re-define metrics for `dplyr::mutate()`.
+
+
+## gmutate() and gsummarize()
+
+`mmetrics::add()` is a just wrapper function for `mmetrics::gmutate()` and `mmetrics::gsummarize()`.
+We can use these functions directly instead of `mmetrics::add()`.

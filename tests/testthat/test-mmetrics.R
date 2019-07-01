@@ -12,7 +12,7 @@ df <- data.frame(
 
 metrics <- define(
   cost = sum(cost),
-  ctr  = sum(click)/sum(impression)
+  ctr = sum(click)/sum(impression)
 )
 
 test_that("define metrics", {
@@ -44,14 +44,13 @@ test_that("mutate two keys", {
   expect_equal(add(df, gender, age, metrics = metrics, summarize = FALSE), df_expected)
 })
 
-test_that("mutate all", {
+test_that("mutate all with", {
   df_expected <- dplyr::mutate(df, !!!metrics)
   expect_equal(add(df, metrics = metrics, summarize=FALSE), df_expected)
 })
 
-test_that("mutate two keys with disaggregate", {
+test_that("mutate with non summarize mode to evaluate ratio", {
   metrics <- define(cost_ratio = cost/sum(cost))
-  df_expected <- dplyr::group_by(df, gender, age) %>% dplyr::mutate(!!!metrics)
-  expect_equal(add(df, gender, age, metrics = metrics, summarize = FALSE), df_expected)
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::mutate(!!!metrics)
+  expect_equal(add(df, gender, metrics = metrics, summarize = FALSE), df_expected)
 })
-
