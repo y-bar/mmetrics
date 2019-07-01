@@ -8,6 +8,7 @@
 \describe{
 \item{gender}{gender, Men (M) or Female (F)}
 \item{age}{age}
+\item{cost}{the amount how much money do you earn or advertisers spend}
 \item{impression}{the number of how many times some ads are shown to users}
 \item{click}{the number of how many times users click ads}
 \item{conversion}{the number of how many times users converge}
