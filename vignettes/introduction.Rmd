@@ -70,13 +70,25 @@ metrics_disaggregated <- mmetrics::disaggregate(metrics)
 mmetrics::add(df, metrics = metrics_disaggregated, summarize = FALSE)
 ```
 
-`mmetrics::disaggregate()` remove *the first aggregation function* for the argument and return disaggregated metrics.
+
+### Remove aggregate function from metrics using `mmetrics::disaggregate()`
+It is hassle for users to re-define metrics when you would like to use these for `dplyr::mutate()`.
+In this case, you can use `mmetrics::disaggregate()` to remove *the first aggregation function* for the argument and return disaggregated metrics.
 ```{r}
-mmetrics::disaggregate(metrics)
+metrics_disaggregated <- mmetrics::disaggregate(metrics)
+# Woo! sum() are removed!!!
+print(metrics_disaggregated)
 ```
 
-Using `mmetrics::disaggregate()`, we do not need to re-define metrics for `dplyr::mutate()`.
+You can use these metrics for `dplyr::mutate()`
+```{r}
+dplyr::mutate(df, !!!metrics_disaggregated)
+```
 
+...or, you can use `mmetrics::gmutate()` defind in our package.
+```{r}
+mmetrics::gmutate(df, metrics = metrics_disaggregated)
+```
 
 ## gmutate() and gsummarize()
 

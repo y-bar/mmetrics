@@ -70,6 +70,25 @@ Call `mmetrics::add()` with grouping key (here `gender`) then we will get new `d
 mmetrics::add(df, gender, metrics = metrics)
 ```
 
+### Remove aggregate function from metrics using `mmetrics::disaggregate()`
+It is hassle for users to re-define metrics when you would like to use these for `dplyr::mutate()`.
+In this case, you can use `mmetrics::disaggregate()` to remove *the first aggregation function* for the argument and return disaggregated metrics.
+```{r}
+metrics_disaggregated <- mmetrics::disaggregate(metrics)
+# Woo! sum() are removed!!!
+print(metrics_disaggregated)
+```
+
+You can use these metrics for `dplyr::mutate()`
+```{r}
+dplyr::mutate(df, !!!metrics_disaggregated)
+```
+
+...or, you can use `mmetrics::gmutate()` defind in our package.
+```{r}
+mmetrics::gmutate(df, metrics = metrics_disaggregated)
+```
+
 ## More examples
 
 - As a first step, see the vignettes [Introduction to {mmetrics} package](https://shinichi-takayanagi.github.io/mmetrics/articles/introduction.html)
