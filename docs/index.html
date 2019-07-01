@@ -152,12 +152,12 @@
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; $cost</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; expr: ^cost</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; env:  00000000106D5AC8</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; env:  00000000147666E8</span></span>
 <span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; </span></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; $ctr</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
 <span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; expr: ^click / impression</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; env:  00000000105903C8</span></span></code></pre></div>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; env:  0000000013D28ED8</span></span></code></pre></div>
 <p>You can use these metrics with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> for row-wise metrics computation.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(df, <span class="op">!!!</span>metrics_disaggregated)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt;    gender age cost impression click conversion        ctr</span></span>
