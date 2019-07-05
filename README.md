@@ -89,12 +89,12 @@ print(metrics_disaggregated)
 #> $cost
 #> <quosure>
 #> expr: ^cost
-#> env:  00000000180BC490
+#> env:  global
 #> 
 #> $ctr
 #> <quosure>
 #> expr: ^click / impression
-#> env:  00000000180DABD8
+#> env:  global
 ```
 
 You can use these metrics with `dplyr::mutate()` for row-wise metrics
