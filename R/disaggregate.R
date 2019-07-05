@@ -8,9 +8,6 @@ allowed_operators <- list(
 )
 
 disaggregate_ <- function(x) {
-  if (!rlang::is_quosure(x)) {
-    return(disaggregate_expr(x))
-  }
   env <- rlang::quo_get_env(x)
   x <- rlang::quo_squash(x)
   rlang::new_quosure(disaggregate_expr(x), env = env)
