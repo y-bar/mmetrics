@@ -83,35 +83,18 @@ these for `dplyr::mutate()`. In this case, you can use
 for the argument and return disaggregated metrics.
 
 ``` r
-# Original metrics. sum() is used for this metrics
-metrics
-#> <list_of<quosure>>
-#> 
-#> $cost
-#> <quosure>
-#> expr: ^sum(cost)
-#> env:  global
-#> 
-#> $ctr
-#> <quosure>
-#> expr: ^sum(click) / sum(impression)
-#> env:  global
-```
-
-``` r
-# Disaggregate metrics!
 metrics_disaggregated <- mmetrics::disaggregate(metrics)
 # Woo! sum() are removed!!!
-metrics_disaggregated
+print(metrics_disaggregated)
 #> $cost
 #> <quosure>
 #> expr: ^cost
-#> env:  00000000184F1C38
+#> env:  global
 #> 
 #> $ctr
 #> <quosure>
 #> expr: ^click / impression
-#> env:  0000000018514A48
+#> env:  global
 ```
 
 You can use these metrics with `dplyr::mutate()` for row-wise metrics

@@ -1,29 +1,32 @@
-not_allowed_operators <- lapply(getGroupMembers("Summary"), as.symbol)
+allowed_operators <- list(
+  quote(`+`),
+  quote(`%*%`),
+  quote(`%%`),
+  quote(`-`),
+  quote(`/`),
+  quote(`*`)
+)
 
-disaggregate_ <- function(x, is_top) {
-  if(is_top){x <- rlang::quo_squash(x)}
-  if(length(x) == 1){return(x)}
+disaggregate_ <- function(x) {
+  env <- rlang::quo_get_env(x)
+  x <- rlang::quo_squash(x)
+  rlang::new_quosure(disaggregate_expr(x), env = env)
+}
+
+disaggregate_expr <- function(x) {
+  if (length(x) == 1) {return(x)}
 
   call_name <- x[[1]]
   call_args <- x[-1]
 
-  if (any(purrr::map_lgl(not_allowed_operators, ~ identical(.x, call_name)))){
+  if (!any(purrr::map_lgl(allowed_operators, ~ identical(.x, call_name)))) {
     # Remove function, only first level aggregate function is removed
     x[[1]] <- NULL
-    if(is_top){
-      return(rlang::quo(!!x[[1]]))
-    } else{
-      return(x[[1]])
-    }
+    return(x[[1]])
   }
 
-  x[-1] <- purrr::map(call_args, ~ disaggregate_(.x, FALSE))
-  rlang::quo(!!x)
-}
-
-disaggregate__ <- function(x){
-  result <- disaggregate_(x, TRUE)
-  rlang::quo_set_expr(result, rlang::quo_squash(result))
+  x[-1] <- purrr::map(call_args, ~ disaggregate_expr(.x))
+  x
 }
 
 #' Disaggregate metrics defined as aggregate function
@@ -45,9 +48,9 @@ disaggregate__ <- function(x){
 #' @export
 disaggregate <- function(metrics){
   if(rlang::is_quosures(metrics)){
-    purrr::map(metrics, disaggregate__)
+    purrr::map(metrics, disaggregate_)
   } else if(rlang::is_quosure(metrics)){
-    disaggregate__(metrics)
+    disaggregate_(metrics)
   } else{
     stop("metrics must be quosure or quores")
   }
