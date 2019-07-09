@@ -46,3 +46,18 @@ test_that("mutate with non summarize mode to evaluate ratio", {
   df_expected <- dplyr::group_by(df, gender) %>% dplyr::mutate(!!!metrics)
   expect_equal(add(df, gender, metrics = metrics, summarize = FALSE), df_expected)
 })
+
+test_that("not evaluatable metrics must be removed without error", {
+  metrics <- define(cost_ratio = cost/sum(cost), x = xxx/sum(yyy))
+  # Mutate
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::mutate(cost_ratio = cost/sum(cost))
+  expect_equal(add(df, gender, metrics = metrics, summarize = FALSE), df_expected)
+  # Summarize
+  metrics <- define(
+    cost = sum(cost),
+    ctr = sum(click)/sum(impression),
+    x = xxx/sum(yyy)
+  )
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(cost = sum(cost), ctr = sum(click)/sum(impression))
+  expect_equal(add(df, gender, metrics = metrics, summarize = TRUE), df_expected)
+})
