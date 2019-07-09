@@ -68,6 +68,7 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
 #' @export
 gsummarize <- function(df, ..., metrics){
   group_vars <- rlang::enquos(...)
+  metrics <- mfilter(metrics, df)
   df %>%
     dplyr::group_by(!!!group_vars) %>%
     dplyr::summarise(!!!metrics) %>%
@@ -80,8 +81,26 @@ gsummarise <- gsummarize
 #' @export
 gmutate <- function(df, ..., metrics){
   group_vars <- rlang::enquos(...)
+  metrics <- mfilter(metrics, df)
   df %>%
     dplyr::group_by(!!!group_vars) %>%
     dplyr::mutate(!!!metrics) %>%
     dplyr::ungroup()
+}
+
+#' Filter metrics which is evaluatable
+#'
+#' Filter metrics which is evaluatable
+#'
+#' @param metrics metrics
+#' @param df data.frame
+#'
+#' @export
+mfilter <- function(metrics, df){
+  is_evaluatable <- function(metrics, df){
+    out <- tryCatch(eval(rlang::quo_squash(metrics), envir = df), error = function(e) e, silent = TRUE)
+    !(any(class(out) == "error"))
+  }
+  is_effective <- unlist(purrr::map(metrics, ~ is_evaluatable(.x, df)))
+  metrics[is_effective]
 }
