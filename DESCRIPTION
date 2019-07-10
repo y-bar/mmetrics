@@ -22,7 +22,8 @@ Imports:
   dplyr,
   purrr,
   stringr,
-  rlang
+  rlang,
+  ggplot2
 Suggests: 
   covr,
   devtools,
