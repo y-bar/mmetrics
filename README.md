@@ -1,12 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mmetrics <a href='https://shinichi-takayanagi.github.io/mmetrics/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# mmetrics <a href='https://y-bar.github.io/mmetrics/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![Travis-CI Build
 Status](https://api.travis-ci.com/y-bar/mmetrics.svg?branch=master)](https://travis-ci.com/y-bar/mmetrics)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
-[![codecov](https://codecov.io/github/y-bar/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/shinichi-takayanagi/mmetrics)
+[![codecov](https://codecov.io/github/y-bar/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/y-bar/mmetrics)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
@@ -156,4 +156,4 @@ mmetrics::gmutate(df, metrics = metrics_disaggregated)
 ## More examples
 
   - As a first step, see the vignettes [Introduction to {mmetrics}
-    package](https://shinichi-takayanagi.github.io/mmetrics/articles/introduction.html)
+    package](https://y-bar.github.io/mmetrics/articles/introduction.html)
