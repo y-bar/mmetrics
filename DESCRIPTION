@@ -38,3 +38,4 @@ Collate:
     'disaggregate.R'
     'mmetrics.R'
     'metrics_definition.R'
+    'mplot.R'
