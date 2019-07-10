@@ -63,7 +63,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/shinichi-takayanagi/mmetrics">
+  <a href="https://github.com/y-bar/mmetrics">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -97,7 +97,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"mmetrics"</span>)</span></code></pre></div>
 <p>Or install the development version from github with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># install.packages("remotes")</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"shinichi-takayanagi/mmetrics"</span>)</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"y-bar/mmetrics"</span>)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -146,53 +146,67 @@
 <a href="#remove-aggregate-function-from-metrics-using-mmetricsdisaggregate" class="anchor"></a>Remove aggregate function from metrics using <code><a href="reference/disaggregate.html">mmetrics::disaggregate()</a></code>
 </h3>
 <p>It is hassle for users to re-define metrics when you would like to use these for <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>. In this case, you can use <code><a href="reference/disaggregate.html">mmetrics::disaggregate()</a></code> to remove <em>the first aggregation function</em> for the argument and return disaggregated metrics.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>metrics_disaggregated &lt;-<span class="st"> </span>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/disaggregate">disaggregate</a></span>(metrics)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Woo! sum() are removed!!!</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(metrics_disaggregated)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; $cost</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; expr: ^cost</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; env:  global</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; </span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; $ctr</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; expr: ^click / impression</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; env:  global</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Original metrics. sum() is used for this metrics</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>metrics</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; &lt;list_of&lt;quosure&gt;&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; $cost</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; expr: ^sum(cost)</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; env:  global</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; </span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; $ctr</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; expr: ^sum(click) / sum(impression)</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; env:  global</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Disaggregate metrics!</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>metrics_disaggregated &lt;-<span class="st"> </span>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/disaggregate">disaggregate</a></span>(metrics)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># Woo! sum() are removed!!!</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>metrics_disaggregated</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; $cost</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; expr: ^cost</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; env:  global</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; </span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; $ctr</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; &lt;quosure&gt;</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; expr: ^click / impression</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; env:  global</span></span></code></pre></div>
 <p>You can use these metrics with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> for row-wise metrics computation.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(df, <span class="op">!!!</span>metrics_disaggregated)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt;    gender age cost impression click conversion        ctr</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; 1       M  10   51        101     0          0 0.00000000</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; 2       F  20   52        102     3          1 0.02941176</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 3       M  30   53        103     6          2 0.05825243</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 4       F  40   54        104     9          3 0.08653846</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 5       M  50   55        105    12          4 0.11428571</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; 6       F  60   56        106    15          5 0.14150943</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; 7       M  70   57        107    18          6 0.16822430</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; 8       F  80   58        108    21          7 0.19444444</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; 9       M  90   59        109    24          8 0.22018349</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; 10      F 100   60        110    27          9 0.24545455</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(df, <span class="op">!!!</span>metrics_disaggregated)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt;    gender age cost impression click conversion        ctr</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; 1       M  10   51        101     0          0 0.00000000</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; 2       F  20   52        102     3          1 0.02941176</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 3       M  30   53        103     6          2 0.05825243</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 4       F  40   54        104     9          3 0.08653846</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 5       M  50   55        105    12          4 0.11428571</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 6       F  60   56        106    15          5 0.14150943</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 7       M  70   57        107    18          6 0.16822430</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 8       F  80   58        108    21          7 0.19444444</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 9       M  90   59        109    24          8 0.22018349</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 10      F 100   60        110    27          9 0.24545455</span></span></code></pre></div>
 <p>…or, you can do the same compucation using <code><a href="reference/add.html">mmetrics::gmutate()</a></code> defind in our package. In this case, you do not need to write <code>!!!</code> (bang-bang-bang) operator explicitly.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">gmutate</a></span>(df, <span class="dt">metrics =</span> metrics_disaggregated)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; # A tibble: 10 x 7</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt;    gender   age  cost impression click conversion    ctr</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;int&gt;  &lt;dbl&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;  1 M         10    51        101     0          0 0     </span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;  2 F         20    52        102     3          1 0.0294</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;  3 M         30    53        103     6          2 0.0583</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;  4 F         40    54        104     9          3 0.0865</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;  5 M         50    55        105    12          4 0.114 </span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt;  6 F         60    56        106    15          5 0.142 </span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;  7 M         70    57        107    18          6 0.168 </span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;  8 F         80    58        108    21          7 0.194 </span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt;  9 M         90    59        109    24          8 0.220 </span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; 10 F        100    60        110    27          9 0.245</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mmetrics<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/mmetrics/topics/add">gmutate</a></span>(df, <span class="dt">metrics =</span> metrics_disaggregated)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; # A tibble: 10 x 7</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;    gender   age  cost impression click conversion    ctr</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;  1 M         10    51        101     0          0 0     </span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;  2 F         20    52        102     3          1 0.0294</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;  3 M         30    53        103     6          2 0.0583</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;  4 F         40    54        104     9          3 0.0865</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  5 M         50    55        105    12          4 0.114 </span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;  6 F         60    56        106    15          5 0.142 </span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;  7 M         70    57        107    18          6 0.168 </span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;  8 F         80    58        108    21          7 0.194 </span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;  9 M         90    59        109    24          8 0.220 </span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; 10 F        100    60        110    27          9 0.245</span></span></code></pre></div>
 </div>
 </div>
 <div id="more-examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#more-examples" class="anchor"></a>More examples</h2>
 <ul>
-<li>As a first step, see the vignettes <a href="https://shinichi-takayanagi.github.io/mmetrics/articles/introduction.html">Introduction to {mmetrics} package</a>
+<li>As a first step, see the vignettes <a href="https://y-bar.github.io/mmetrics/articles/introduction.html">Introduction to {mmetrics} package</a>
 </li>
 </ul>
 </div>
@@ -205,9 +219,9 @@
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=mmetrics">https://​cloud.r-project.org/​package=mmetrics</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/shinichi-takayanagi/mmetrics">https://​github.com/​shinichi-takayanagi/​mmetrics</a>
+<li>Browse source code at <br><a href="https://github.com/y-bar/mmetrics">https://​github.com/​y-bar/​mmetrics</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/shinichi-takayanagi/mmetrics/issues">https://​github.com/​shinichi-takayanagi/​mmetrics/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/y-bar/mmetrics/issues">https://​github.com/​y-bar/​mmetrics/​issues</a>
 </li>
 </ul>
 </div>
@@ -225,15 +239,16 @@
 <li>Shinichi Takayanagi <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Nagi Teramo <br><small class="roles"> Author </small>  </li>
 <li>Takahiro Yoshinaga <br><small class="roles"> Author </small>  </li>
+<li>Yanjin Li <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.com/shinichi-takayanagi/mmetrics"><img src="https://api.travis-ci.com/shinichi-takayanagi/mmetrics.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://travis-ci.com/y-bar/mmetrics"><img src="https://api.travis-ci.com/y-bar/mmetrics.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://cran.r-project.org/package=mmetrics"><img src="https://www.r-pkg.org/badges/version/mmetrics" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://codecov.io/github/shinichi-takayanagi/mmetrics"><img src="https://codecov.io/github/shinichi-takayanagi/mmetrics/branch/master/graphs/badge.svg" alt="codecov"></a></li>
+<li><a href="https://codecov.io/github/shinichi-takayanagi/mmetrics"><img src="https://codecov.io/github/y-bar/mmetrics/branch/master/graphs/badge.svg" alt="codecov"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
@@ -243,7 +258,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Shinichi Takayanagi, Nagi Teramo, Takahiro Yoshinaga.</p>
+  <p>Developed by Shinichi Takayanagi, Nagi Teramo, Takahiro Yoshinaga, Yanjin Li.</p>
 </div>
 
 <div class="pkgdown">
