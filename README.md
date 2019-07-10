@@ -4,9 +4,9 @@
 # mmetrics <a href='https://shinichi-takayanagi.github.io/mmetrics/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![Travis-CI Build
-Status](https://api.travis-ci.com/shinichi-takayanagi/mmetrics.svg?branch=master)](https://travis-ci.com/shinichi-takayanagi/mmetrics)
+Status](https://api.travis-ci.com/y-bar/mmetrics.svg?branch=master)](https://travis-ci.com/y-bar/mmetrics)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
-[![codecov](https://codecov.io/github/shinichi-takayanagi/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/shinichi-takayanagi/mmetrics)
+[![codecov](https://codecov.io/github/y-bar/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/shinichi-takayanagi/mmetrics)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
@@ -24,7 +24,7 @@ Or install the development version from github with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("shinichi-takayanagi/mmetrics")
+remotes::install_github("y-bar/mmetrics")
 ```
 
 ## Example
@@ -83,9 +83,26 @@ these for `dplyr::mutate()`. In this case, you can use
 for the argument and return disaggregated metrics.
 
 ``` r
+# Original metrics. sum() is used for this metrics
+metrics
+#> <list_of<quosure>>
+#> 
+#> $cost
+#> <quosure>
+#> expr: ^sum(cost)
+#> env:  global
+#> 
+#> $ctr
+#> <quosure>
+#> expr: ^sum(click) / sum(impression)
+#> env:  global
+```
+
+``` r
+# Disaggregate metrics!
 metrics_disaggregated <- mmetrics::disaggregate(metrics)
 # Woo! sum() are removed!!!
-print(metrics_disaggregated)
+metrics_disaggregated
 #> $cost
 #> <quosure>
 #> expr: ^cost
