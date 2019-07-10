@@ -146,13 +146,16 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>ggplot object</p>
-<p>df <- mmetrics::dummy_data
-# Add metrics and plot directly
-mmetrics::mplot_bar(mmetrics::add(df, gender), ctr, gender)
-# You can remove x parameter. in this case first column is assumed as x parameter
-mmetrics::mplot_bar(mmetrics::add(df, gender), ctr)</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/dummy_data'>dummy_data</a></span>
+<span class='co'># Add metrics and plot directly</span>
+<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/mplot_bar'>mplot_bar</a></span>(<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/add'>add</a></span>(<span class='no'>df</span>, <span class='no'>gender</span>), <span class='no'>ctr</span>, <span class='no'>gender</span>)
+<span class='co'># You can remove x parameter. in this case first column is assumed as x parameter</span>
+<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/mplot_bar'>mplot_bar</a></span>(<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/add'>add</a></span>(<span class='no'>df</span>, <span class='no'>gender</span>), <span class='no'>ctr</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -160,7 +163,9 @@ mmetrics::mplot_bar(mmetrics::add(df, gender), ctr)</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

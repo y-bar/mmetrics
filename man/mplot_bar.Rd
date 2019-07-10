@@ -15,7 +15,11 @@ mplot_bar(df, y, x = NULL)
 }
 \value{
 ggplot object
-
+}
+\description{
+Plot bar charts.
+}
+\examples{
 \dontrun{
 df <- mmetrics::dummy_data
 # Add metrics and plot directly
@@ -23,7 +27,4 @@ mmetrics::mplot_bar(mmetrics::add(df, gender), ctr, gender)
 # You can remove x parameter. in this case first column is assumed as x parameter
 mmetrics::mplot_bar(mmetrics::add(df, gender), ctr)
 }
-}
-\description{
-Plot bar charts.
 }

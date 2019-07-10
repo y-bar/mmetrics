@@ -8,7 +8,8 @@
 #'
 #' @return ggplot object
 #'
-#'\dontrun{
+#' @examples
+#' \dontrun{
 #' df <- mmetrics::dummy_data
 #' # Add metrics and plot directly
 #' mmetrics::mplot_bar(mmetrics::add(df, gender), ctr, gender)
