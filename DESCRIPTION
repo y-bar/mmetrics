@@ -22,7 +22,8 @@ Imports:
   dplyr,
   purrr,
   stringr,
-  rlang
+  rlang,
+  ggplot2
 Suggests: 
   covr,
   devtools,
@@ -38,3 +39,4 @@ Collate:
     'disaggregate.R'
     'mmetrics.R'
     'metrics_definition.R'
+    'mplot.R'
