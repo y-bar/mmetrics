@@ -18,13 +18,13 @@
 #'}
 #' @export
 mplot_bar <- function(df, y, x = NULL){
-  if(is.null(x)){
+  x <- rlang::enquo(x)
+  y <- rlang::enquo(y)
+
+  if(rlang::quo_is_null(x)){
     # x must be first colunm!
     x <- rlang::sym(names(df)[1])
-  } else{
-    x <- rlang::enquo(x)
   }
-  y <- rlang::enquo(y)
 
   ggplot2::ggplot(df, ggplot2::aes(x = !!x, y = !!y, color = !!x, fill = !!x)) +
     ggplot2::geom_bar(stat = "identity")
