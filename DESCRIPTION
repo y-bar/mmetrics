@@ -1,7 +1,7 @@
 Package: mmetrics
 Type: Package
 Title: Easy Computation of Marketing Metrics with Different Analysis Axis 
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(
   person("Shinichi", "Takayanagi", , "shinichi.takayanagi@gmail.com", role = c("aut", "cre")),
   person("Nagi", "Teramo", , "teramonagi@gmail.com", role = c("aut")),
