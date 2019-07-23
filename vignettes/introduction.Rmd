@@ -109,3 +109,17 @@ mmetrics::gsummarize(df, gender, metrics = metrics)
 mmetrics::gmutate(df, gender, metrics = mmetrics::define(cost_ratio = cost/sum(cost)))
 ```
 
+
+## Run multiple tabulations at once
+
+If you would like to run code with multiple keys all at onece, you can use the combination of `!!(bangbang operator)` and `rlang::sym` as the following:
+
+```{r}
+# Define keys
+keys <- c("gender", "age")
+# Run
+purrr::map(keys, ~ mmetrics::add(df, !!rlang::sym(.x), metrics = metrics))
+```
+
+
+
