@@ -1,12 +1,13 @@
 Package: mmetrics
 Type: Package
-Title: Easy Computation of Marketing Metrics with Different Analysis Axis 
+Title: Easy Computation of Marketing Metrics with Different Analysis Axis
 Version: 0.2.0
 Authors@R: c(
   person("Shinichi", "Takayanagi", , "shinichi.takayanagi@gmail.com", role = c("aut", "cre")),
   person("Nagi", "Teramo", , "teramonagi@gmail.com", role = c("aut")),
   person("Takahiro", "Yoshinaga", , "t.yoshinaga0106@gmail.com", role = c("aut")),
-  person("Yanjin", "Li", , "yanjin0501@gmail.com", role = c("aut"))
+  person("Yanjin", "Li", , "yanjin0501@gmail.com", role = c("aut")),
+  person("Chaerim", "Yeo", , "yeochaerim@gmail.com", role = c("aut"))
   )
 Description: Provides a mechanism for easy computation of marketing metrics.
   By default in this package, metrics for digital marketing (e.g. CTR (Click Through Rate), CVR (Conversion Rate), CPC (Cost Per Click) etc) are calculated but you can define your own metrics easily.
@@ -24,7 +25,7 @@ Imports:
   stringr,
   rlang,
   ggplot2
-Suggests: 
+Suggests:
   covr,
   devtools,
   testthat,
@@ -34,7 +35,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
-Collate: 
+Collate:
     'data.R'
     'disaggregate.R'
     'mmetrics.R'

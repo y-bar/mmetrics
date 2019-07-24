@@ -8,7 +8,7 @@ NULL
 
 #' Define metrics
 #'
-#' This helper is just synonum for [rlang::quos] intended to provide seamless experience for package user.
+#' This helper is just synonym of [rlang::quos] intended to provide seamless experience for package user.
 #'
 #' @param ... Metrics definition.
 #'
@@ -19,32 +19,34 @@ NULL
 #'   [quos][rlang::quos], [dplyr's vignettes](https://cran.r-project.org/package=dplyr/vignettes/programming.html)
 #'
 #' @export
-define <- function(...){
-  rlang::quos(...)
-}
+define <- function(...) rlang::quos(...)
 
-#' Add metrics to data.frame
+#' Aggregate metrics
 #'
-#' Add metrics to data.frame
+#' `add()` is wrapper function of `gmutate()` and `gsummarize()`.
+#' `gmutate()` adds aggregated metrics as variables to the given data frame.
+#' `gsummarize()` aggregates metrics from the given data frame;
+#' `gsummarize()` and `gsummarise()` are synonyms.
 #'
-#' @param df data.frame
-#' @param ... group keys
-#' @param metrics metrics defined by mmetrics::define()
-#' @param summarize summarize data (`gsummarize()` called inside) or not (`gmutate()` called inside).
+#' @param df Data frame.
+#' @param ... Variables to group by.
+#' @param metrics Metrics defined by [mmetrics::define()].
+#' @param summarize Summarization flag. If it is `TRUE`, `add()` works as `gsummarize()`.
+#'   Otherwise, `add()` works as `gmutate()`.
 #'
-#' @return data.frame with calculated metrics
+#' @return Data frame with calculated metrics
 #'
 #' @examples
-#' # Dummy data
+#' # Prepare data frame
 #' df <- data.frame(
 #'   gender = rep(c("M", "F"), 5),
 #'   age = (1:10)*10,
-#'   cost = c(51:60),
-#'   impression = c(101:110),
-#'   click = c(0:9)*3
+#'   cost = (51:60),
+#'   impression = (101:110),
+#'   click = (0:9)*3
 #' )
 #'
-# Example metrics
+#' # Define metrics
 #' metrics <- mmetrics::define(
 #'   cost = sum(cost),
 #'   ctr  = sum(click)/sum(impression)
@@ -57,50 +59,48 @@ define <- function(...){
 add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
   group_vars <- rlang::enquos(...)
 
-  if(summarize){
+  if (summarize) {
     gsummarize(df, !!!group_vars, metrics = metrics)
-  } else{
+  } else {
     gmutate(df, !!!group_vars, metrics = metrics)
   }
 }
 
 #' @rdname add
 #' @export
-gsummarize <- function(df, ..., metrics){
-  group_vars <- rlang::enquos(...)
-  metrics <- mfilter(metrics, df)
-  df %>%
-    dplyr::group_by(!!!group_vars) %>%
-    dplyr::summarise(!!!metrics) %>%
-    dplyr::ungroup()
-}
+gsummarize <- function(df, ..., metrics) dplyr::summarise %>% gprocess(df, ..., metrics)
+
 #' @rdname add
+#' @export
 gsummarise <- gsummarize
 
 #' @rdname add
 #' @export
-gmutate <- function(df, ..., metrics){
-  group_vars <- rlang::enquos(...)
-  metrics <- mfilter(metrics, df)
-  df %>%
-    dplyr::group_by(!!!group_vars) %>%
-    dplyr::mutate(!!!metrics) %>%
-    dplyr::ungroup()
-}
+gmutate <- function(df, ..., metrics) dplyr::mutate %>% gprocess(df, ..., metrics)
 
-#' Filter metrics which is evaluatable
+#' Pick evaluable metrics in the given data frame
 #'
-#' Filter metrics which is evaluatable
+#' @param metrics Metrics
+#' @param df Data frame
 #'
-#' @param metrics metrics
-#' @param df data.frame
+#' @return Evaluable metrics
 #'
 #' @export
-mfilter <- function(metrics, df){
-  is_evaluatable <- function(metrics, df){
+mfilter <- function(metrics, df) {
+  is_evaluatable <- function(metrics, df) {
     out <- tryCatch(eval(rlang::quo_squash(metrics), envir = df), error = function(e) e, silent = TRUE)
     !(any(class(out) == "error"))
   }
   is_effective <- unlist(purrr::map(metrics, ~ is_evaluatable(.x, df)))
   metrics[is_effective]
+}
+
+# Internal function for data process with group
+gprocess <- function(fun, df, ..., metrics) {
+  group_vars <- rlang::enquos(...)
+  metrics <- mfilter(metrics, df)
+  df %>%
+    dplyr::group_by(!!!group_vars) %>%
+    fun(!!!metrics) %>%
+    dplyr::ungroup()
 }
