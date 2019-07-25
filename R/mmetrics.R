@@ -68,7 +68,7 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
 
 #' @rdname add
 #' @export
-gsummarize <- function(df, ..., metrics) dplyr::summarise %>% gprocess(df, ..., metrics)
+gsummarize <- function(df, ..., metrics) dplyr::summarise %>% gprocess(df, ..., metrics = metrics)
 
 #' @rdname add
 #' @export
@@ -76,7 +76,7 @@ gsummarise <- gsummarize
 
 #' @rdname add
 #' @export
-gmutate <- function(df, ..., metrics) dplyr::mutate %>% gprocess(df, ..., metrics)
+gmutate <- function(df, ..., metrics) dplyr::mutate %>% gprocess(df, ..., metrics = metrics)
 
 #' Pick evaluable metrics in the given data frame
 #'
