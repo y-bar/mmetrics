@@ -25,7 +25,7 @@ define <- function(...) rlang::quos(...)
 #'
 #' `add()` is wrapper function of `gmutate()` and `gsummarize()`.
 #' `gmutate()` adds aggregated metrics as variables to the given data frame.
-#' `gsummarize()` aggregates metrics from the given data frame;
+#' `gsummarize()` aggregates metrics from the given data frame.
 #' `gsummarize()` and `gsummarise()` are synonyms.
 #'
 #' @param df Data frame.
@@ -68,7 +68,7 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
 
 #' @rdname add
 #' @export
-gsummarize <- function(df, ..., metrics) dplyr::summarise %>% gprocess(df, ..., metrics = metrics)
+gsummarize <- function(df, ..., metrics) gprocess(dplyr::summarise, df, ..., metrics = metrics)
 
 #' @rdname add
 #' @export
@@ -76,7 +76,7 @@ gsummarise <- gsummarize
 
 #' @rdname add
 #' @export
-gmutate <- function(df, ..., metrics) dplyr::mutate %>% gprocess(df, ..., metrics = metrics)
+gmutate <- function(df, ..., metrics) gprocess(dplyr::mutate, df, ..., metrics = metrics)
 
 #' Pick evaluable metrics in the given data frame
 #'
