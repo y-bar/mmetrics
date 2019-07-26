@@ -2,15 +2,18 @@
 % Please edit documentation in R/mmetrics.R
 \name{mfilter}
 \alias{mfilter}
-\title{Filter metrics which is evaluatable}
+\title{Pick evaluable metrics in the given data frame}
 \usage{
 mfilter(metrics, df)
 }
 \arguments{
-\item{metrics}{metrics}
+\item{metrics}{Metrics}
 
-\item{df}{data.frame}
+\item{df}{Data frame}
+}
+\value{
+Evaluable metrics
 }
 \description{
-Filter metrics which is evaluatable
+Pick evaluable metrics in the given data frame
 }

@@ -13,7 +13,7 @@ These arguments are automatically \link[rlang:quo]{quoted}
 and \link[rlang:eval_tidy]{evaluated} in the context of the data frame.}
 }
 \description{
-This helper is just synonum for \link[rlang:quos]{rlang::quos} intended to provide seamless experience for package user.
+This helper is just synonym of \link[rlang:quos]{rlang::quos} intended to provide seamless experience for package user.
 }
 \seealso{
 \link[rlang:quos]{quos}, \href{https://cran.r-project.org/package=dplyr/vignettes/programming.html}{dplyr's vignettes}
