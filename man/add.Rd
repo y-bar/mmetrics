@@ -2,12 +2,15 @@
 % Please edit documentation in R/mmetrics.R
 \name{add}
 \alias{add}
+\alias{measure}
 \alias{gsummarize}
 \alias{gsummarise}
 \alias{gmutate}
 \title{Aggregate metrics}
 \usage{
 add(df, ..., metrics = ad_metrics, summarize = TRUE)
+
+measure(df, ..., metrics = ad_metrics, summarize = TRUE)
 
 gsummarize(df, ..., metrics)
 
@@ -33,6 +36,7 @@ Data frame with calculated metrics
 \code{gmutate()} adds aggregated metrics as variables to the given data frame.
 \code{gsummarize()} aggregates metrics from the given data frame.
 \code{gsummarize()} and \code{gsummarise()} are synonyms.
+\code{measure()} and \code{add()} are also synonyms.
 }
 \examples{
 # Prepare data frame
@@ -46,6 +50,7 @@ df <- data.frame(
 
 # Define metrics
 metrics <- mmetrics::define(
+  count = n(),
   cost = sum(cost),
   ctr  = sum(click)/sum(impression)
 )
