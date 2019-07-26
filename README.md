@@ -5,6 +5,8 @@
 
 [![Travis-CI Build
 Status](https://api.travis-ci.com/y-bar/mmetrics.svg?branch=master)](https://travis-ci.com/y-bar/mmetrics)
+[![Build
+status](https://ci.appveyor.com/api/projects/status/99up72xw1eoj8s3i/branch/master?svg=true)](https://ci.appveyor.com/project/teramonagi/mmetrics/branch/master)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
 [![codecov](https://codecov.io/github/y-bar/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/y-bar/mmetrics)
 [![Licence](https://img.shields.io/cran/l/mmetrics.svg)](https://github.com/y-bar/mmetrics/blob/master/LICENSE)
