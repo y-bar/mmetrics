@@ -17,6 +17,7 @@ test_that("summarize one key", {
   expect_equal(add(df, gender, metrics = metrics, summarize = TRUE), df_expected)
 })
 
+
 test_that("summarize two keys", {
   df_expected <- dplyr::group_by(df, gender, age) %>% dplyr::summarise(!!!metrics)
   expect_equal(add(df, gender, age, metrics = metrics, summarize = TRUE), df_expected)
@@ -62,4 +63,9 @@ test_that("not evaluatable metrics must be removed without error", {
   )
   df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(count = n(), cost = sum(cost), ctr = sum(click)/sum(impression))
   expect_equal(add(df, gender, metrics = metrics, summarize = TRUE), df_expected)
+})
+
+test_that("add() and measure() must return the same result", {
+  expect_equal(add(df, gender, metrics = metrics, summarize = FALSE), measure(df, gender, metrics = metrics, summarize = FALSE))
+  expect_equal(add(df, gender, metrics = metrics), measure(df, gender, metrics = metrics))
 })

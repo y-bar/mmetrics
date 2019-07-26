@@ -27,6 +27,7 @@ define <- function(...) rlang::quos(...)
 #' `gmutate()` adds aggregated metrics as variables to the given data frame.
 #' `gsummarize()` aggregates metrics from the given data frame.
 #' `gsummarize()` and `gsummarise()` are synonyms.
+#' `measure()` and `add()` are also synonyms.
 #'
 #' @param df Data frame.
 #' @param ... Variables to group by.
@@ -48,6 +49,7 @@ define <- function(...) rlang::quos(...)
 #'
 #' # Define metrics
 #' metrics <- mmetrics::define(
+#'   count = n(),
 #'   cost = sum(cost),
 #'   ctr  = sum(click)/sum(impression)
 #' )
@@ -65,6 +67,10 @@ add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
     gmutate(df, !!!group_vars, metrics = metrics)
   }
 }
+
+#' @rdname add
+#' @export
+measure <- add
 
 #' @rdname add
 #' @export
