@@ -7,12 +7,9 @@
 Status](https://api.travis-ci.com/y-bar/mmetrics.svg?branch=master)](https://travis-ci.com/y-bar/mmetrics)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/mmetrics)](https://cran.r-project.org/package=mmetrics)
 [![codecov](https://codecov.io/github/y-bar/mmetrics/branch/master/graphs/badge.svg)](https://codecov.io/github/y-bar/mmetrics)
-[![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/cran/l/mmetrics.svg)](https://github.com/y-bar/mmetrics/blob/master/LICENSE)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2019--07--22-yellowgreen.svg)](/commits/master)
 
 Easy Computation of Marketing Metrics with Different Analysis Axis.
 
