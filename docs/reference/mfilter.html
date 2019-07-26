@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter metrics which is evaluatable — mfilter • mmetrics</title>
+<title>Pick evaluable metrics in the given data frame — mfilter • mmetrics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Filter metrics which is evaluatable — mfilter" />
+<meta property="og:title" content="Pick evaluable metrics in the given data frame — mfilter" />
 
-<meta property="og:description" content="Filter metrics which is evaluatable" />
+<meta property="og:description" content="Pick evaluable metrics in the given data frame" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -113,31 +113,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter metrics which is evaluatable</h1>
+    <h1>Pick evaluable metrics in the given data frame</h1>
     <small class="dont-index">Source: <a href='https://github.com/y-bar/mmetrics/blob/master/R/mmetrics.R'><code>R/mmetrics.R</code></a></small>
     <div class="hidden name"><code>mfilter.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Filter metrics which is evaluatable</p>
+    <p>Pick evaluable metrics in the given data frame</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>mfilter</span>(<span class='no'>metrics</span>, <span class='no'>df</span>)</pre>
+    <pre class="usage"><span class='fu'>mfilter</span>(<span class='no'>df</span>, <span class='no'>metrics</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>metrics</th>
-      <td><p>metrics</p></td>
+      <th>df</th>
+      <td><p>Data frame</p></td>
     </tr>
     <tr>
-      <th>df</th>
-      <td><p>data.frame</p></td>
+      <th>metrics</th>
+      <td><p>Metrics</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Evaluable metrics</p>
     
 
   </div>
@@ -145,14 +149,16 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Shinichi Takayanagi, Nagi Teramo, Takahiro Yoshinaga, Yanjin Li.</p>
+  <p>Developed by Shinichi Takayanagi, Nagi Teramo, Takahiro Yoshinaga, Yanjin Li, Chaerim Yeo.</p>
 </div>
 
 <div class="pkgdown">
