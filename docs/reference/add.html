@@ -35,7 +35,8 @@
 <meta property="og:description" content="add() is wrapper function of gmutate() and gsummarize().
 gmutate() adds aggregated metrics as variables to the given data frame.
 gsummarize() aggregates metrics from the given data frame.
-gsummarize() and gsummarise() are synonyms." />
+gsummarize() and gsummarise() are synonyms.
+measure() and add() are also synonyms." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -126,11 +127,14 @@ gsummarize() and gsummarise() are synonyms." />
     <p><code>add()</code> is wrapper function of <code>gmutate()</code> and <code>gsummarize()</code>.
 <code>gmutate()</code> adds aggregated metrics as variables to the given data frame.
 <code>gsummarize()</code> aggregates metrics from the given data frame.
-<code>gsummarize()</code> and <code>gsummarise()</code> are synonyms.</p>
+<code>gsummarize()</code> and <code>gsummarise()</code> are synonyms.
+<code>measure()</code> and <code>add()</code> are also synonyms.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>add</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>ad_metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>measure</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>ad_metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>gsummarize</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>)
 
@@ -177,16 +181,17 @@ Otherwise, <code>add()</code> works as <code>gmutate()</code>.</p></td>
 
 <span class='co'># Define metrics</span>
 <span class='no'>metrics</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/define'>define</a></span>(
+  <span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'>n</span>(),
   <span class='kw'>cost</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>cost</span>),
   <span class='kw'>ctr</span>  <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>click</span>)/<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>impression</span>)
 )
 
 <span class='co'># Evaluate</span>
-<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/add'>add</a></span>(<span class='no'>df</span>, <span class='no'>gender</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>metrics</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 3</span><span>
-#&gt;   gender  cost   ctr
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> F        280 0.142
-#&gt; </span><span style='color: #555555;'>2</span><span> M        275 0.114</div><div class='input'>
+<span class='kw pkg'>mmetrics</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mmetrics/topics/add'>add</a></span>(<span class='no'>df</span>, <span class='no'>gender</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>metrics</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 4</span><span>
+#&gt;   gender count  cost   ctr
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> F          5   280 0.142
+#&gt; </span><span style='color: #555555;'>2</span><span> M          5   275 0.114</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
