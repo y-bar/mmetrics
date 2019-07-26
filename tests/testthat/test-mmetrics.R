@@ -3,12 +3,13 @@ context("test-mmetrics")
 df <- dummy_data
 
 metrics <- define(
+  count = n(),
   cost = sum(cost),
   ctr = sum(click)/sum(impression)
 )
 
 test_that("define metrics", {
-  expect_equal(metrics, rlang::quos(cost = sum(cost), ctr  = sum(click)/sum(impression)))
+  expect_equal(metrics, rlang::quos(count = n(), cost = sum(cost), ctr  = sum(click)/sum(impression)))
 })
 
 test_that("summarize one key", {
@@ -54,10 +55,11 @@ test_that("not evaluatable metrics must be removed without error", {
   expect_equal(add(df, gender, metrics = metrics, summarize = FALSE), df_expected)
   # Summarize
   metrics <- define(
+    count = n(),
     cost = sum(cost),
     ctr = sum(click)/sum(impression),
     x = xxx/sum(yyy)
   )
-  df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(cost = sum(cost), ctr = sum(click)/sum(impression))
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(count = n(), cost = sum(cost), ctr = sum(click)/sum(impression))
   expect_equal(add(df, gender, metrics = metrics, summarize = TRUE), df_expected)
 })

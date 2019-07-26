@@ -4,12 +4,12 @@
 \alias{mfilter}
 \title{Pick evaluable metrics in the given data frame}
 \usage{
-mfilter(metrics, df)
+mfilter(df, metrics)
 }
 \arguments{
-\item{metrics}{Metrics}
-
 \item{df}{Data frame}
+
+\item{metrics}{Metrics}
 }
 \value{
 Evaluable metrics
