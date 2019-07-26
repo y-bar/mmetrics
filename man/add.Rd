@@ -5,7 +5,7 @@
 \alias{gsummarize}
 \alias{gsummarise}
 \alias{gmutate}
-\title{Add metrics to data.frame}
+\title{Aggregate metrics}
 \usage{
 add(df, ..., metrics = ad_metrics, summarize = TRUE)
 
@@ -16,30 +16,35 @@ gsummarise(df, ..., metrics)
 gmutate(df, ..., metrics)
 }
 \arguments{
-\item{df}{data.frame}
+\item{df}{Data frame.}
 
-\item{...}{group keys}
+\item{...}{Variables to group by.}
 
-\item{metrics}{metrics defined by mmetrics::define()}
+\item{metrics}{Metrics defined by \code{\link[mmetrics:define]{mmetrics::define()}}.}
 
-\item{summarize}{summarize data (\code{gsummarize()} called inside) or not (\code{gmutate()} called inside).}
+\item{summarize}{Summarization flag. If it is \code{TRUE}, \code{add()} works as \code{gsummarize()}.
+Otherwise, \code{add()} works as \code{gmutate()}.}
 }
 \value{
-data.frame with calculated metrics
+Data frame with calculated metrics
 }
 \description{
-Add metrics to data.frame
+\code{add()} is wrapper function of \code{gmutate()} and \code{gsummarize()}.
+\code{gmutate()} adds aggregated metrics as variables to the given data frame.
+\code{gsummarize()} aggregates metrics from the given data frame.
+\code{gsummarize()} and \code{gsummarise()} are synonyms.
 }
 \examples{
-# Dummy data
+# Prepare data frame
 df <- data.frame(
   gender = rep(c("M", "F"), 5),
   age = (1:10)*10,
-  cost = c(51:60),
-  impression = c(101:110),
-  click = c(0:9)*3
+  cost = (51:60),
+  impression = (101:110),
+  click = (0:9)*3
 )
 
+# Define metrics
 metrics <- mmetrics::define(
   cost = sum(cost),
   ctr  = sum(click)/sum(impression)

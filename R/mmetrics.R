@@ -80,15 +80,16 @@ gmutate <- function(df, ..., metrics) gprocess(dplyr::mutate, df, ..., metrics =
 
 #' Pick evaluable metrics in the given data frame
 #'
-#' @param metrics Metrics
 #' @param df Data frame
+#' @param metrics Metrics
 #'
 #' @return Evaluable metrics
 #'
 #' @export
-mfilter <- function(metrics, df) {
+mfilter <- function(df, metrics) {
   is_evaluatable <- function(metrics, df) {
-    out <- tryCatch(eval(rlang::quo_squash(metrics), envir = df), error = function(e) e, silent = TRUE)
+    # Adhoc code
+    out <- tryCatch(dplyr::mutate(df[1, ], !!rlang::quo_squash(metrics)), error = function(e) e, silent = TRUE)
     !(any(class(out) == "error"))
   }
   is_effective <- unlist(purrr::map(metrics, ~ is_evaluatable(.x, df)))
@@ -98,7 +99,7 @@ mfilter <- function(metrics, df) {
 # Internal function for data process with group
 gprocess <- function(fun, df, ..., metrics) {
   group_vars <- rlang::enquos(...)
-  metrics <- mfilter(metrics, df)
+  metrics <- mfilter(df, metrics)
   df %>%
     dplyr::group_by(!!!group_vars) %>%
     fun(!!!metrics) %>%
