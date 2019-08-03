@@ -26,7 +26,8 @@ define <- function(...) rlang::quos(...)
 #' `add()` is wrapper function of `gmutate()` and `gsummarize()`.
 #' `gmutate()` adds aggregated metrics as variables to the given data frame.
 #' `gsummarize()` aggregates metrics from the given data frame.
-#' `gsummarize()` and `gsummarise()` are synonyms.
+#' `gsummarize()` and `gsummarise()` are
+#' synonyms.
 #' `measure()` and `add()` are also synonyms.
 #'
 #' @param df Data frame.
@@ -74,7 +75,7 @@ measure <- add
 
 #' @rdname add
 #' @export
-gsummarize <- function(df, ..., metrics) gprocess(dplyr::summarise, df, ..., metrics = metrics)
+gsummarize <- function(df, ..., metrics) gprocess(df, ..., metrics = metrics, fun = dplyr::summarise)
 
 #' @rdname add
 #' @export
@@ -82,7 +83,7 @@ gsummarise <- gsummarize
 
 #' @rdname add
 #' @export
-gmutate <- function(df, ..., metrics) gprocess(dplyr::mutate, df, ..., metrics = metrics)
+gmutate <- function(df, ..., metrics) gprocess(df, ..., metrics = metrics, fun = dplyr::mutate)
 
 #' Pick evaluable metrics in the given data frame
 #'
@@ -93,17 +94,23 @@ gmutate <- function(df, ..., metrics) gprocess(dplyr::mutate, df, ..., metrics =
 #'
 #' @export
 mfilter <- function(df, metrics) {
-  is_evaluatable <- function(metrics, df) {
-    # Adhoc code
-    out <- tryCatch(dplyr::mutate(df[1, ], !!rlang::quo_squash(metrics)), error = function(e) e, silent = TRUE)
+  # Adhoc code adjsted to behave like dplyr
+  is_evaluatable <- function(df, metrics) {
+    out <- tryCatch(dplyr::mutate(df[1, ], !!!rlang::quo_squash(metrics)), error = function(e) e, silent = TRUE)
     !(any(class(out) == "error"))
   }
-  is_effective <- unlist(purrr::map(metrics, ~ is_evaluatable(.x, df)))
-  metrics[is_effective]
+  is_ok <- rep(FALSE, length(metrics))
+  for(i in seq_along(metrics)){
+    is_ok[i] <- TRUE
+    if(!is_evaluatable(df, metrics[is_ok])){
+      is_ok[i] <- FALSE
+    }
+  }
+  metrics[is_ok]
 }
 
 # Internal function for data process with group
-gprocess <- function(fun, df, ..., metrics) {
+gprocess <- function(df, ..., metrics, fun) {
   group_vars <- rlang::enquos(...)
   metrics <- mfilter(df, metrics)
   df %>%

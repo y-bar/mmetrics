@@ -50,18 +50,24 @@ test_that("mutate with non summarize mode to evaluate ratio", {
 })
 
 test_that("not evaluatable metrics must be removed without error", {
-  metrics <- define(cost_ratio = cost/sum(cost), x = xxx/sum(yyy))
+  # Metrics with meaningless one
+  mm <- define(count = n(), x = xxx/sum(yyy), ctr = sum(click)/sum(impression), cost_ratio = cost/sum(cost))
+  mg <- define(count = n(), x = xxx/sum(yyy), ctr = sum(click)/sum(impression))
   # Mutate
-  df_expected <- dplyr::group_by(df, gender) %>% dplyr::mutate(cost_ratio = cost/sum(cost))
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::mutate(count = n(), ctr = sum(click)/sum(impression), cost_ratio = cost/sum(cost))
+  expect_equal(gmutate(df, gender, metrics = mm), df_expected)
+  # Summarize
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(count = n(), ctr = sum(click)/sum(impression))
+  expect_equal(gsummarize(df, gender, metrics = mg), df_expected)
+})
+
+test_that("metrics with a variable must be evaluated if the variable is defined/located at front column", {
+  metrics <- define(total_impression = sum(impression), ctr = sum(click)/total_impression)
+  # Mutate
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::mutate(!!!metrics)
   expect_equal(add(df, gender, metrics = metrics, summarize = FALSE), df_expected)
   # Summarize
-  metrics <- define(
-    count = n(),
-    cost = sum(cost),
-    ctr = sum(click)/sum(impression),
-    x = xxx/sum(yyy)
-  )
-  df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(count = n(), cost = sum(cost), ctr = sum(click)/sum(impression))
+  df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(!!!metrics)
   expect_equal(add(df, gender, metrics = metrics, summarize = TRUE), df_expected)
 })
 
