@@ -96,7 +96,7 @@ gmutate <- function(df, ..., metrics) gprocess(df, ..., metrics = metrics, fun =
 mfilter <- function(df, metrics) {
   # Adhoc code adjsted to behave like dplyr
   is_evaluatable <- function(df, metrics) {
-    out <- tryCatch(dplyr::mutate(df[1, ], !!!rlang::quo_squash(metrics)), error = function(e) e, silent = TRUE)
+    out <- tryCatch(dplyr::mutate(head(df), !!!rlang::quo_squash(metrics)), error = function(e) e, silent = TRUE)
     !(any(class(out) == "error"))
   }
   is_ok <- rep(FALSE, length(metrics))
