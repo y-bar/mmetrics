@@ -35,7 +35,8 @@
 <meta property="og:description" content="add() is wrapper function of gmutate() and gsummarize().
 gmutate() adds aggregated metrics as variables to the given data frame.
 gsummarize() aggregates metrics from the given data frame.
-gsummarize() and gsummarise() are synonyms.
+gsummarize() and gsummarise() are
+synonyms.
 measure() and add() are also synonyms." />
 
 <meta property="og:image" content="/logo.png" />
@@ -127,20 +128,21 @@ measure() and add() are also synonyms." />
     <p><code>add()</code> is wrapper function of <code>gmutate()</code> and <code>gsummarize()</code>.
 <code>gmutate()</code> adds aggregated metrics as variables to the given data frame.
 <code>gsummarize()</code> aggregates metrics from the given data frame.
-<code>gsummarize()</code> and <code>gsummarise()</code> are synonyms.
+<code>gsummarize()</code> and <code>gsummarise()</code> are
+synonyms.
 <code>measure()</code> and <code>add()</code> are also synonyms.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>ad_metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>add</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>is_filtered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>measure</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='no'>ad_metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>measure</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>, <span class='kw'>summarize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>is_filtered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>gsummarize</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>)
+<span class='fu'>gsummarize</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>, <span class='kw'>is_filtered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>gsummarise</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>)
+<span class='fu'>gsummarise</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>, <span class='kw'>is_filtered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>gmutate</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>)</pre>
+<span class='fu'>gmutate</span>(<span class='no'>df</span>, <span class='no'>...</span>, <span class='no'>metrics</span>, <span class='kw'>is_filtered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,6 +163,10 @@ measure() and add() are also synonyms." />
       <th>summarize</th>
       <td><p>Summarization flag. If it is <code>TRUE</code>, <code>add()</code> works as <code>gsummarize()</code>.
 Otherwise, <code>add()</code> works as <code>gmutate()</code>.</p></td>
+    </tr>
+    <tr>
+      <th>is_filtered</th>
+      <td><p>Filter metrics which does not work for df or not</p></td>
     </tr>
     </table>
     
