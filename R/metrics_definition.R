@@ -1,7 +1,11 @@
 #' @include mmetrics.R
 NULL
 
-# Advertisng world metrics
+#' Advertisng world metrics
+#'
+#' Advertisng world metrics
+#'
+#' @export
 ad_metrics <- define(
   count = n(),
   cost = sum(cost),
