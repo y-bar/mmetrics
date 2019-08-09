@@ -35,6 +35,7 @@ define <- function(...) rlang::quos(...)
 #' @param metrics Metrics defined by [mmetrics::define()].
 #' @param summarize Summarization flag. If it is `TRUE`, `add()` works as `gsummarize()`.
 #'   Otherwise, `add()` works as `gmutate()`.
+#' @param is_filtered Filter metrics which does not work for df or not
 #'
 #' @return Data frame with calculated metrics
 #'
@@ -59,13 +60,13 @@ define <- function(...) rlang::quos(...)
 #' mmetrics::add(df, gender, metrics = metrics)
 #'
 #' @export
-add <- function(df, ..., metrics = ad_metrics, summarize = TRUE){
+add <- function(df, ..., metrics, summarize = TRUE, is_filtered = TRUE){
   group_vars <- rlang::enquos(...)
 
   if (summarize) {
-    gsummarize(df, !!!group_vars, metrics = metrics)
+    gsummarize(df, !!!group_vars, metrics = metrics, is_filtered = is_filtered)
   } else {
-    gmutate(df, !!!group_vars, metrics = metrics)
+    gmutate(df, !!!group_vars, metrics = metrics, is_filtered = is_filtered)
   }
 }
 
@@ -75,7 +76,7 @@ measure <- add
 
 #' @rdname add
 #' @export
-gsummarize <- function(df, ..., metrics) gprocess(df, ..., metrics = metrics, fun = dplyr::summarise)
+gsummarize <- function(df, ..., metrics, is_filtered = TRUE) gprocess(df, ..., metrics = metrics, is_filtered = is_filtered, fun = dplyr::summarise)
 
 #' @rdname add
 #' @export
@@ -83,7 +84,7 @@ gsummarise <- gsummarize
 
 #' @rdname add
 #' @export
-gmutate <- function(df, ..., metrics) gprocess(df, ..., metrics = metrics, fun = dplyr::mutate)
+gmutate <- function(df, ..., metrics, is_filtered = TRUE) gprocess(df, ..., metrics = metrics, is_filtered = is_filtered, fun = dplyr::mutate)
 
 #' Pick evaluable metrics in the given data frame
 #'
@@ -110,9 +111,11 @@ mfilter <- function(df, metrics) {
 }
 
 # Internal function for data process with group
-gprocess <- function(df, ..., metrics, fun) {
+gprocess <- function(df, ..., metrics, is_filtered, fun) {
   group_vars <- rlang::enquos(...)
-  metrics <- mfilter(df, metrics)
+  if(is_filtered){
+    metrics <- mfilter(df, metrics)
+  }
   df %>%
     dplyr::group_by(!!!group_vars) %>%
     fun(!!!metrics) %>%

@@ -8,15 +8,15 @@
 \alias{gmutate}
 \title{Aggregate metrics}
 \usage{
-add(df, ..., metrics = ad_metrics, summarize = TRUE)
+add(df, ..., metrics, summarize = TRUE, is_filtered = TRUE)
 
-measure(df, ..., metrics = ad_metrics, summarize = TRUE)
+measure(df, ..., metrics, summarize = TRUE, is_filtered = TRUE)
 
-gsummarize(df, ..., metrics)
+gsummarize(df, ..., metrics, is_filtered = TRUE)
 
-gsummarise(df, ..., metrics)
+gsummarise(df, ..., metrics, is_filtered = TRUE)
 
-gmutate(df, ..., metrics)
+gmutate(df, ..., metrics, is_filtered = TRUE)
 }
 \arguments{
 \item{df}{Data frame.}
@@ -27,6 +27,8 @@ gmutate(df, ..., metrics)
 
 \item{summarize}{Summarization flag. If it is \code{TRUE}, \code{add()} works as \code{gsummarize()}.
 Otherwise, \code{add()} works as \code{gmutate()}.}
+
+\item{is_filtered}{Filter metrics which does not work for df or not}
 }
 \value{
 Data frame with calculated metrics
@@ -35,7 +37,8 @@ Data frame with calculated metrics
 \code{add()} is wrapper function of \code{gmutate()} and \code{gsummarize()}.
 \code{gmutate()} adds aggregated metrics as variables to the given data frame.
 \code{gsummarize()} aggregates metrics from the given data frame.
-\code{gsummarize()} and \code{gsummarise()} are synonyms.
+\code{gsummarize()} and \code{gsummarise()} are
+synonyms.
 \code{measure()} and \code{add()} are also synonyms.
 }
 \examples{
