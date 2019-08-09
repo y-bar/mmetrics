@@ -2,6 +2,7 @@
 NULL
 
 # Advertisng world metrics
+#' @export
 ad_metrics <- define(
   count = n(),
   cost = sum(cost),
