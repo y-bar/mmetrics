@@ -8,15 +8,17 @@
 \alias{gmutate}
 \title{Aggregate metrics}
 \usage{
-add(df, ..., metrics, summarize = TRUE, is_filtered = TRUE)
+add(df, ..., metrics, summarize = TRUE, filter = TRUE,
+  collect = TRUE)
 
-measure(df, ..., metrics, summarize = TRUE, is_filtered = TRUE)
+measure(df, ..., metrics, summarize = TRUE, filter = TRUE,
+  collect = TRUE)
 
-gsummarize(df, ..., metrics, is_filtered = TRUE)
+gsummarize(df, ..., metrics, filter = TRUE, collect = TRUE)
 
-gsummarise(df, ..., metrics, is_filtered = TRUE)
+gsummarise(df, ..., metrics, filter = TRUE, collect = TRUE)
 
-gmutate(df, ..., metrics, is_filtered = TRUE)
+gmutate(df, ..., metrics, filter = TRUE, collect = TRUE)
 }
 \arguments{
 \item{df}{Data frame.}
@@ -28,7 +30,9 @@ gmutate(df, ..., metrics, is_filtered = TRUE)
 \item{summarize}{Summarization flag. If it is \code{TRUE}, \code{add()} works as \code{gsummarize()}.
 Otherwise, \code{add()} works as \code{gmutate()}.}
 
-\item{is_filtered}{Filter metrics which does not work for df or not}
+\item{filter}{Filter metrics which does not work for df or not}
+
+\item{collect}{Retrieves data into a local tibble or not. Mainly used for sparklyr}
 }
 \value{
 Data frame with calculated metrics
