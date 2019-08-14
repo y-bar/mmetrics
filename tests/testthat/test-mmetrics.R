@@ -56,11 +56,21 @@ test_that("not evaluatable metrics must be removed without error", {
   # Mutate
   df_expected <- dplyr::group_by(df, gender) %>% dplyr::mutate(count = n(), ctr = sum(click)/sum(impression), cost_ratio = cost/sum(cost))
   expect_equal(gmutate(df, gender, metrics = mm), df_expected)
-  expect_error(gmutate(df, gender, metrics = mm, is_filtered = FALSE))
+  expect_error(gmutate(df, gender, metrics = mm, filter = FALSE))
   # Summarize
   df_expected <- dplyr::group_by(df, gender) %>% dplyr::summarize(count = n(), ctr = sum(click)/sum(impression))
   expect_equal(gsummarize(df, gender, metrics = mg), df_expected)
-  expect_error(gsummarize(df, gender, metrics = mm, is_filtered = FALSE))
+  expect_error(gsummarize(df, gender, metrics = mm, filter= FALSE))
+})
+
+test_that("not evaluatable metrics must produce error when filter = FALSE", {
+  # Metrics with meaningless one
+  mm <- define(count = n(), x = xxx/sum(yyy), ctr = sum(click)/sum(impression), cost_ratio = cost/sum(cost))
+  mg <- define(count = n(), x = xxx/sum(yyy), ctr = sum(click)/sum(impression))
+  # Mutate
+  expect_error(gmutate(df, gender, metrics = mm, filter = FALSE))
+  # Summarize
+  expect_error(gsummarize(df, gender, metrics = mm, filter= FALSE))
 })
 
 test_that("metrics with a variable must be evaluated if the variable is defined/located at front column", {

@@ -24,7 +24,8 @@ Imports:
   purrr,
   stringr,
   rlang,
-  ggplot2
+  ggplot2,
+  sparklyr
 Suggests: 
   covr,
   devtools,
